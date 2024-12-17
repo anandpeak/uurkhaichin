@@ -252,7 +252,13 @@ const Home = () => {
               }}
               className="w-[90%] page bg-[#fff] text-[#1E293B] font-bold rounded-lg py-2.5 button-in"
             >
-              {page === 1 ? "Эхлүүлэх" : "Үргэлжлүүлэх"}
+              {page === 1
+                ? "Эхлүүлэх"
+                : page === 14
+                ? "Бэлэн"
+                : page === 16
+                ? "Илгээх"
+                : "Үргэлжлүүлэх"}
             </button>
           )}
           {page === 15 && (
