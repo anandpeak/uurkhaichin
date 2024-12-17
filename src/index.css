@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "GIP-Regular";
+}
+
+@font-face {
+  font-family: "GIP-Regular";
+  src: url("./fonts/GIP-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GIP-Bold";
+  src: url("./fonts/GIP-ExtraBoldItalic.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GIP-Italic";
+  src: url("./fonts/GIP-RegularItalic.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
