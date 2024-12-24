@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 
 const Background = ({ children, backgroundImage }) => {
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
 
   useEffect(() => {
-    const updateHeight = () => {
-      setScreenHeight(window.innerHeight);
+    const updateViewportHeight = () => {
+      if (window.visualViewport) {
+        setViewportHeight(window.visualViewport.height);
+      } else {
+        setViewportHeight(window.innerHeight);
+      }
     };
 
-    window.addEventListener("resize", updateHeight);
+    // Update the height on load and when viewport changes
+    updateViewportHeight();
+    window.visualViewport?.addEventListener("resize", updateViewportHeight);
+    window.addEventListener("resize", updateViewportHeight);
 
     return () => {
-      window.removeEventListener("resize", updateHeight);
+      window.visualViewport?.removeEventListener(
+        "resize",
+        updateViewportHeight
+      );
+      window.removeEventListener("resize", updateViewportHeight);
     };
   }, []);
 
@@ -22,7 +33,7 @@ const Background = ({ children, backgroundImage }) => {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: `${screenHeight}px`,
+        height: `${viewportHeight}px`,
       }}
     >
       <div className="relative z-10">{children}</div>
