@@ -26,7 +26,7 @@ import Certificate from "./components/Certificate";
 
 const Home = () => {
   const [all, setAll] = useState(false);
-  const [page, setPage] = useState(10);
+  const [page, setPage] = useState(1);
   const [diff, setDiff] = useState(null);
   const isEmailValid = /\S+@\S+\.\S+/;
   const [emp, setEmp] = useState({
