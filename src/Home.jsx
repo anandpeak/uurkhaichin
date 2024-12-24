@@ -22,10 +22,11 @@ import License from "./components/License";
 import Time from "./components/Time";
 import Serius from "./components/Serius";
 import CV from "./components/CV";
+import Certificate from "./components/Certificate";
 
 const Home = () => {
   const [all, setAll] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(10);
   const [diff, setDiff] = useState(null);
   const isEmailValid = /\S+@\S+\.\S+/;
   const [emp, setEmp] = useState({
@@ -38,6 +39,9 @@ const Home = () => {
       license: [],
     },
     equipment: [],
+    certificate: "",
+    certificateImg: "",
+    differentMajor: "",
     workTime: "",
     workRange: "",
     salary: "",
@@ -58,7 +62,7 @@ const Home = () => {
   const isEmailValidCheck = isEmailValid.test(emp.mail);
 
   useEffect(() => {
-    if (page === 14) {
+    if (page === 15) {
       setBackgroundImage("/img/bg1.svg");
     } else {
       setBackgroundImage("/img/bg.svg");
@@ -73,40 +77,43 @@ const Home = () => {
       return emp.experience.year;
     }
     if (page === 5) {
-      return emp.experience.company?.length > 0;
+      return emp.experience.company?.length > 0 ? true : false;
     }
     if (page === 6) {
       return emp.major;
     }
     if (page === 7) {
-      if (diff === true) {
-        return emp.workMajor !== "" ? true : false;
-      } else if (diff === false) {
-        return true;
-      }
+      return emp.differentMajor;
     }
     if (page === 8) {
-      return emp.equipment?.length > 0 || emp.driving.car?.length > 0;
+      return (
+        emp.equipment?.length > 0 ||
+        emp.driving.car?.length > 0 ||
+        emp.workMajor
+      );
     }
     if (page === 9) {
       return emp.driving.license?.length > 0;
     }
     if (page === 10) {
-      return emp.workRange && emp.workTime;
+      return emp.certificate;
     }
     if (page === 11) {
-      return emp.workingRoster;
+      return emp.workTime && emp.workRange;
     }
     if (page === 12) {
-      return emp.workingDay;
+      return emp.workingRoster;
     }
     if (page === 13) {
+      return emp.workingDay;
+    }
+    if (page === 14) {
       return emp.salary;
     }
-    if (page === 16) {
-      return isEmailValidCheck && emp.phone && emp.firstname && emp.lastname;
+    if (page === 17) {
+      return emp.lastname && emp.firstname && emp.phone && isEmailValidCheck;
     }
-    if (page > 16) {
+    if (page > 17) {
       return false;
     }
     return true;
@@ -116,28 +123,58 @@ const Home = () => {
     <Background backgroundImage={backgroundImage}>
       <div className="flex items-center justify-center min-h-screen mx-[20px]">
         {page !== 1 && page !== 2 && page !== 15 && page <= 16 && (
-          <div className="absolute top-[40px] left-[20px]">
+          <div
+            className={`absolute ${
+              page === 16 ? "top-[40px]" : "top-[40px]"
+            } left-[20px]`}
+          >
             <button
               onClick={() => {
                 if (all) {
                   setAll(false);
                   return;
-                }
-                if (page === 6 && emp.experience.year === "0") {
+                } else if (page === 6 && emp.experience.year === "0") {
                   setPage(page - 2);
+                } else if (page === 9) {
+                  if (emp.major === "Машин механизмын оператор") {
+                    setPage(8);
+                  } else {
+                    setPage(7);
+                  }
+                } else if (page === 10) {
+                  if (emp.major === "Инженер") {
+                    setPage(8);
+                  } else {
+                    setPage(9);
+                  }
+                } else if (page === 11) {
+                  if (
+                    emp.major === "Машин механизмын оператор" ||
+                    emp.major === "Инженер"
+                  ) {
+                    setPage(10);
+                  } else {
+                    setPage(6);
+                  }
+                } else if (page === 14) {
+                  if (emp.situation === "temporary") {
+                    setPage(13);
+                  } else {
+                    setPage(11);
+                  }
                 } else {
                   setPage(page - 1);
                 }
               }}
               className={`flex items-center gap-1 text-xs ${
-                page === 14 ? "text-[#fff]" : "text-[#1E293B]"
+                page === 15 ? "text-[#fff]" : "text-[#1E293B]"
               } `}
             >
               <MdKeyboardArrowLeft className="text-base" /> Буцах
             </button>
           </div>
         )}
-        {page > 3 && page < 14 && (
+        {page > 3 && page < 15 && (
           <div className="flex items-center absolute top-[46px] left-1/2 transform -translate-x-1/2  gap-2">
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
@@ -156,17 +193,17 @@ const Home = () => {
             />
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
-                page >= 10 ? "bg-[#1A1A1A]" : "bg-[#fff]"
-              }`}
-            />
-            <div
-              className={`w-[22px] h-[4px] rounded-lg ${
-                page >= 12 ? "bg-[#1A1A1A]" : "bg-[#fff]"
+                page >= 11 ? "bg-[#1A1A1A]" : "bg-[#fff]"
               }`}
             />
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
                 page >= 13 ? "bg-[#1A1A1A]" : "bg-[#fff]"
+              }`}
+            />
+            <div
+              className={`w-[22px] h-[4px] rounded-lg ${
+                page >= 14 ? "bg-[#1A1A1A]" : "bg-[#fff]"
               }`}
             />
           </div>
@@ -190,62 +227,64 @@ const Home = () => {
         ) : page === 9 ? (
           <License emp={emp} setEmp={setEmp} />
         ) : page === 10 ? (
-          <Time emp={emp} setEmp={setEmp} />
+          <Certificate emp={emp} setEmp={setEmp} />
         ) : page === 11 ? (
-          <Roaster emp={emp} setEmp={setEmp} />
+          <Time emp={emp} setEmp={setEmp} />
         ) : page === 12 ? (
-          <WorkDay emp={emp} setEmp={setEmp} />
+          <Roaster emp={emp} setEmp={setEmp} />
         ) : page === 13 ? (
-          <Salary emp={emp} setEmp={setEmp} />
+          <WorkDay emp={emp} setEmp={setEmp} />
         ) : page === 14 ? (
-          <Serius />
+          <Salary emp={emp} setEmp={setEmp} />
         ) : page === 15 ? (
-          <Advantages emp={emp} setEmp={setEmp} />
+          <Serius />
         ) : page === 16 ? (
+          <Advantages emp={emp} setEmp={setEmp} />
+        ) : page === 17 ? (
           <CV emp={emp} setEmp={setEmp} />
         ) : (
           <Ending />
         )}
-
+        {console.log(page)}
         <div className="absolute bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
-          {isButtonVisible() && page !== 15 && (
+          {isButtonVisible() && page !== 16 && (
             <button
               onClick={() => {
-                if (page === 4 && emp.experience?.year === "0") {
-                  setPage(page + 2);
-                } else if (page === 7) {
-                  const major = emp.major?.trim();
-                  if (
-                    major === "Машин механизмын оператор" ||
-                    major === "Суурин төхөөрөмжийн оператор"
-                  ) {
+                if (page === 4) {
+                  if (emp.experience.year !== "0") {
                     setPage(page + 1);
                   } else {
-                    if (emp.situation === "permanent") {
-                      setPage(page + 3);
-                    } else {
-                      setPage(page + 4);
-                    }
+                    setPage(6);
+                  }
+                } else if (page === 7) {
+                  if (
+                    emp.major === "Машин механизмын оператор" ||
+                    emp.major === "Суурин төхөөрөмжийн оператор" ||
+                    emp.major === "Инженер" ||
+                    emp.major === "Механик" ||
+                    emp.major === "Аюулгүй ажиллагаа" ||
+                    emp.major === "Гагнуур"
+                  ) {
+                    setPage(8);
+                  } else {
+                    setPage(11);
                   }
                 } else if (page === 8) {
-                  const major = emp.major?.trim();
-                  if (major === "Машин механизмын оператор") {
-                    setPage(page + 1);
+                  if (emp.major === "Машин механизмын оператор") {
+                    setPage(9);
                   } else {
-                    if (emp.situation === "permanent") {
-                      setPage(page + 2);
+                    if (emp.major === "Инженер") {
+                      setPage(10);
                     } else {
-                      setPage(page + 3);
+                      setPage(11);
                     }
                   }
-                } else if (page === 9) {
+                } else if (page === 11) {
                   if (emp.situation === "permanent") {
-                    setPage(page + 1);
+                    setPage(14);
                   } else {
-                    setPage(page + 2);
+                    setPage(page + 1);
                   }
-                } else if (page === 10) {
-                  setPage(page + 3);
                 } else {
                   setPage(page + 1);
                 }
@@ -254,20 +293,20 @@ const Home = () => {
             >
               {page === 1
                 ? "Эхлүүлэх"
-                : page === 14
+                : page === 15
                 ? "Бэлэн"
                 : page === 16
                 ? "Илгээх"
                 : "Үргэлжлүүлэх"}
             </button>
           )}
-          {page === 15 && (
-            <div className="flex items-center gap-2 justify-between">
+          {page === 16 && (
+            <div className="flex flex-col justify-center">
               <button
                 onClick={() => {
                   setPage(page + 1);
                 }}
-                className="py-3 px-3 text-center text-[#1E293B] border border-[#fff] rounded-lg w-[160px]"
+                className="py-3 px-3 text-center text-[#1E293B] border border-[#fff] rounded-lg w-[330px] mb-2"
               >
                 Алгасах
               </button>
@@ -276,15 +315,15 @@ const Home = () => {
                   setPage(page + 1);
                 }}
                 className={`py-3 px-3 font-bold text-center text-[#1E293B] ${
-                  emp.behaviorAdvantage === "" ||
-                  emp.expAdvantage === "" ||
-                  emp.sportAdvantage === ""
-                    ? "bg-[#CECFD3] text-[#fff] cursor-not-allowed"
-                    : "border border-[#CECFD3] text-[#1E293B] bg-[#fff]"
-                } rounded-lg w-[160px]`}
+                  emp.behaviorAdvantage !== "" ||
+                  emp.expAdvantage !== "" ||
+                  emp.sportAdvantage !== ""
+                    ? "border border-[#CECFD3] text-[#1E293B] bg-[#fff]"
+                    : "bg-[#CECFD3] text-[#fff] cursor-not-allowed"
+                } rounded-lg w-[330px]`}
                 disabled={
-                  emp.behaviorAdvantage === "" ||
-                  emp.expAdvantage === "" ||
+                  emp.behaviorAdvantage === "" &&
+                  emp.expAdvantage === "" &&
                   emp.sportAdvantage === ""
                 }
               >

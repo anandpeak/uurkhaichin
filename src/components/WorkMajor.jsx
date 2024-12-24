@@ -8,7 +8,10 @@ const WorkMajor = ({ emp, setEmp, diff, setDiff }) => {
       </p>
       <div className="flex items-center justify-center gap-6 ">
         <div
-          onClick={() => setDiff(false)}
+          onClick={() => {
+            setDiff(false);
+            setEmp({ ...emp, differentMajor: "no" });
+          }}
           className={`relative flex items-center justify-center border w-[155px] h-[180px] rounded-xl px-2 cursor-pointer ${
             diff === false
               ? "border-[#324d72] bg-[#F4F6FB]"
@@ -35,7 +38,10 @@ const WorkMajor = ({ emp, setEmp, diff, setDiff }) => {
         </div>
 
         <div
-          onClick={() => setDiff(true)}
+          onClick={() => {
+            setDiff(true);
+            setEmp({ ...emp, differentMajor: "" });
+          }}
           className={`relative flex items-center justify-center border w-[155px] h-[180px] rounded-xl px-2 cursor-pointer ${
             diff === true
               ? "border-[#324d72] bg-[#F4F6FB]"
@@ -70,9 +76,9 @@ const WorkMajor = ({ emp, setEmp, diff, setDiff }) => {
 
           <textarea
             onChange={(e) => {
-              setEmp({ ...emp, workMajor: e.target.value });
+              setEmp({ ...emp, differentMajor: e.target.value });
             }}
-            value={emp.workMajor}
+            value={emp.differentMajor}
             className="text-[#242428] text-sm w-full py-2 px-4 rounded-xl border border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 focus:border-[#324d72] h-[80px]"
             placeholder="Жиш: Гагнуур, Машин механизмын оношилгоо, г.м"
           ></textarea>

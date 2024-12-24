@@ -9,7 +9,7 @@ const Condition = ({ emp, setEmp }) => {
       <div className="flex items-center justify-center gap-6">
         <div
           onClick={() => setEmp({ ...emp, situation: "permanent" })}
-          className={`relative flex items-center justify-center border w-[155px] h-[180px] rounded-xl px-2 cursor-pointer ${
+          className={`relative flex items-center justify-center border w-[155px] h-[180px] rounded-xl px-3 cursor-pointer ${
             emp.situation === "permanent"
               ? "border-[#324d72] bg-[#F4F6FB]"
               : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"
@@ -33,7 +33,7 @@ const Condition = ({ emp, setEmp }) => {
         </div>
         <div
           onClick={() => setEmp({ ...emp, situation: "temporary" })}
-          className={`relative flex items-center justify-center border w-[155px] h-[180px] rounded-xl px-2 cursor-pointer ${
+          className={`relative flex items-center justify-center border w-[155px] h-[180px] rounded-xl px-3 cursor-pointer ${
             emp.situation === "temporary"
               ? "border-[#324d72] bg-[#F4F6FB]"
               : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"

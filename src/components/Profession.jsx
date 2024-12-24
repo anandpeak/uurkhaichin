@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import profs from "../json/profession.json";
 import { FaCheck } from "react-icons/fa6";
