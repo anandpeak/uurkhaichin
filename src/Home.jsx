@@ -121,7 +121,10 @@ const Home = () => {
 
   return (
     <Background backgroundImage={backgroundImage}>
-      <div className="flex items-center justify-center min-h-screen mx-[20px]">
+      <div
+        style={{ height: "100%" }}
+        className="flex items-center justify-center mx-[20px]"
+      >
         {page !== 1 && page !== 2 && page !== 15 && page <= 16 && (
           <div
             className={`absolute ${
