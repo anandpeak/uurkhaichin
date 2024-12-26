@@ -10,3 +10,16 @@
 .button-in {
   animation: buttonIn 1s ease-in forwards;
 }
+
+@keyframes endingIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.endings {
+  animation: endingIn 1s ease-in forwards;
+}
