@@ -282,7 +282,9 @@ const Home = () => {
                   setPage(page + 1);
                 }
               }}
-              className="w-[90%] page bg-[#fff] text-[#1E293B] font-bold rounded-lg py-2.5 button-in"
+              className={`w-[90%] page bg-[#fff] text-[#1E293B] font-bold rounded-lg py-2.5 button-in ${
+                page === 1 ? "mb-20" : ""
+              }`}
             >
               {page === 1
                 ? "Эхлүүлэх"
