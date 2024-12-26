@@ -9,7 +9,7 @@ import Nice from "./components/Nice";
 import Experience from "./components/Experience";
 import Company from "./components/Company";
 import Profession from "./components/Profession";
-import WorkMajor from "./components/WorkMajor";
+
 import Equipment from "./components/Equipment";
 import Roaster from "./components/Roaster";
 import WorkDay from "./components/WorkDay";
@@ -17,7 +17,6 @@ import Salary from "./components/Salary";
 import Advantages from "./components/Advantages";
 import Ending from "./components/Ending";
 
-//icons
 import License from "./components/License";
 import Time from "./components/Time";
 import Serius from "./components/Serius";
@@ -27,7 +26,6 @@ import Certificate from "./components/Certificate";
 const Home = () => {
   const [all, setAll] = useState(false);
   const [page, setPage] = useState(1);
-  const [diff, setDiff] = useState(null);
   const isEmailValid = /\S+@\S+\.\S+/;
   const [emp, setEmp] = useState({
     situation: "",
@@ -41,7 +39,6 @@ const Home = () => {
     equipment: [],
     certificate: "",
     certificateImg: "",
-    differentMajor: "",
     workTime: "",
     workRange: "",
     salary: "",
@@ -50,6 +47,7 @@ const Home = () => {
     expAdvantage: "",
     sportAdvantage: "",
     behaviorAdvantage: "",
+    school: "",
     phone: "",
     lastname: "",
     firstname: "",
@@ -62,7 +60,7 @@ const Home = () => {
   const isEmailValidCheck = isEmailValid.test(emp.mail);
 
   useEffect(() => {
-    if (page === 15) {
+    if (page === 14) {
       setBackgroundImage("/img/bg1.svg");
     } else {
       setBackgroundImage("/img/bg.svg");
@@ -83,37 +81,34 @@ const Home = () => {
       return emp.major;
     }
     if (page === 7) {
-      return emp.differentMajor;
-    }
-    if (page === 8) {
       return (
         emp.equipment?.length > 0 ||
         emp.driving.car?.length > 0 ||
         emp.workMajor
       );
     }
-    if (page === 9) {
+    if (page === 8) {
       return emp.driving.license?.length > 0;
     }
-    if (page === 10) {
+    if (page === 9) {
       return emp.certificate;
     }
-    if (page === 11) {
+    if (page === 10) {
       return emp.workTime && emp.workRange;
     }
-    if (page === 12) {
+    if (page === 11) {
       return emp.workingRoster;
     }
-    if (page === 13) {
+    if (page === 12) {
       return emp.workingDay;
     }
-    if (page === 14) {
+    if (page === 13) {
       return emp.salary;
     }
-    if (page === 17) {
+    if (page === 16) {
       return emp.lastname && emp.firstname && emp.phone && isEmailValidCheck;
     }
-    if (page > 17) {
+    if (page > 16) {
       return false;
     }
     return true;
@@ -121,8 +116,8 @@ const Home = () => {
 
   return (
     <Background backgroundImage={backgroundImage}>
-      <div className="flex items-center justify-center min-h-[90vh] mx-[20px]">
-        {page !== 1 && page !== 2 && page !== 15 && page <= 16 && (
+      <div className="flex items-center justify-center min-h-screen mx-[20px]">
+        {page !== 1 && page !== 2 && page !== 14 && page <= 15 && (
           <div
             className={`absolute ${
               page === 16 ? "top-[40px]" : "top-[40px]"
@@ -135,46 +130,46 @@ const Home = () => {
                   return;
                 } else if (page === 6 && emp.experience.year === "0") {
                   setPage(page - 2);
-                } else if (page === 9) {
+                } else if (page === 8) {
                   if (emp.major === "Машин механизмын оператор") {
-                    setPage(8);
-                  } else {
                     setPage(7);
+                  } else {
+                    setPage(6);
+                  }
+                } else if (page === 9) {
+                  if (emp.major === "Инженер") {
+                    setPage(7);
+                  } else {
+                    setPage(8);
                   }
                 } else if (page === 10) {
-                  if (emp.major === "Инженер") {
-                    setPage(8);
-                  } else {
-                    setPage(9);
-                  }
-                } else if (page === 11) {
                   if (
                     emp.major === "Машин механизмын оператор" ||
                     emp.major === "Инженер"
                   ) {
-                    setPage(10);
+                    setPage(9);
                   } else {
                     setPage(6);
                   }
-                } else if (page === 14) {
+                } else if (page === 13) {
                   if (emp.situation === "temporary") {
-                    setPage(13);
+                    setPage(12);
                   } else {
-                    setPage(11);
+                    setPage(10);
                   }
                 } else {
                   setPage(page - 1);
                 }
               }}
               className={`flex items-center gap-1 text-xs ${
-                page === 15 ? "text-[#fff]" : "text-[#1E293B]"
+                page === 14 ? "text-[#fff]" : "text-[#1E293B]"
               } `}
             >
               <MdKeyboardArrowLeft className="text-base" /> Буцах
             </button>
           </div>
         )}
-        {page > 3 && page < 15 && (
+        {page > 3 && page < 14 && (
           <div className="flex items-center absolute top-[46px] left-1/2 transform -translate-x-1/2  gap-2">
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
@@ -188,22 +183,22 @@ const Home = () => {
             />
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
-                page >= 8 ? "bg-[#1A1A1A]" : "bg-[#fff]"
+                page >= 7 ? "bg-[#1A1A1A]" : "bg-[#fff]"
               }`}
             />
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
-                page >= 11 ? "bg-[#1A1A1A]" : "bg-[#fff]"
+                page >= 10 ? "bg-[#1A1A1A]" : "bg-[#fff]"
+              }`}
+            />
+            <div
+              className={`w-[22px] h-[4px] rounded-lg ${
+                page >= 12 ? "bg-[#1A1A1A]" : "bg-[#fff]"
               }`}
             />
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
                 page >= 13 ? "bg-[#1A1A1A]" : "bg-[#fff]"
-              }`}
-            />
-            <div
-              className={`w-[22px] h-[4px] rounded-lg ${
-                page >= 14 ? "bg-[#1A1A1A]" : "bg-[#fff]"
               }`}
             />
           </div>
@@ -221,33 +216,31 @@ const Home = () => {
         ) : page === 6 ? (
           <Profession emp={emp} setEmp={setEmp} all={all} setAll={setAll} />
         ) : page === 7 ? (
-          <WorkMajor emp={emp} setEmp={setEmp} diff={diff} setDiff={setDiff} />
-        ) : page === 8 ? (
           <Equipment emp={emp} setEmp={setEmp} />
-        ) : page === 9 ? (
+        ) : page === 8 ? (
           <License emp={emp} setEmp={setEmp} />
-        ) : page === 10 ? (
+        ) : page === 9 ? (
           <Certificate emp={emp} setEmp={setEmp} />
-        ) : page === 11 ? (
+        ) : page === 10 ? (
           <Time emp={emp} setEmp={setEmp} />
-        ) : page === 12 ? (
+        ) : page === 11 ? (
           <Roaster emp={emp} setEmp={setEmp} />
-        ) : page === 13 ? (
+        ) : page === 12 ? (
           <WorkDay emp={emp} setEmp={setEmp} />
-        ) : page === 14 ? (
+        ) : page === 13 ? (
           <Salary emp={emp} setEmp={setEmp} />
-        ) : page === 15 ? (
+        ) : page === 14 ? (
           <Serius />
-        ) : page === 16 ? (
+        ) : page === 15 ? (
           <Advantages emp={emp} setEmp={setEmp} />
-        ) : page === 17 ? (
+        ) : page === 16 ? (
           <CV emp={emp} setEmp={setEmp} />
         ) : (
           <Ending />
         )}
         {console.log(page)}
         <div className="absolute bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
-          {isButtonVisible() && page !== 16 && (
+          {isButtonVisible() && page !== 15 && (
             <button
               onClick={() => {
                 if (page === 4) {
@@ -256,7 +249,7 @@ const Home = () => {
                   } else {
                     setPage(6);
                   }
-                } else if (page === 7) {
+                } else if (page === 6) {
                   if (
                     emp.major === "Машин механизмын оператор" ||
                     emp.major === "Суурин төхөөрөмжийн оператор" ||
@@ -265,23 +258,23 @@ const Home = () => {
                     emp.major === "Аюулгүй ажиллагаа" ||
                     emp.major === "Гагнуур"
                   ) {
+                    setPage(7);
+                  } else {
+                    setPage(10);
+                  }
+                } else if (page === 7) {
+                  if (emp.major === "Машин механизмын оператор") {
                     setPage(8);
                   } else {
-                    setPage(11);
-                  }
-                } else if (page === 8) {
-                  if (emp.major === "Машин механизмын оператор") {
-                    setPage(9);
-                  } else {
                     if (emp.major === "Инженер") {
-                      setPage(10);
+                      setPage(9);
                     } else {
-                      setPage(11);
+                      setPage(10);
                     }
                   }
-                } else if (page === 11) {
+                } else if (page === 12) {
                   if (emp.situation === "permanent") {
-                    setPage(14);
+                    setPage(13);
                   } else {
                     setPage(page + 1);
                   }
@@ -293,14 +286,14 @@ const Home = () => {
             >
               {page === 1
                 ? "Эхлүүлэх"
-                : page === 15
+                : page === 14
                 ? "Бэлэн"
-                : page === 16
+                : page === 15
                 ? "Илгээх"
                 : "Үргэлжлүүлэх"}
             </button>
           )}
-          {page === 16 && (
+          {page === 15 && (
             <div className="flex flex-col justify-center">
               <button
                 onClick={() => {

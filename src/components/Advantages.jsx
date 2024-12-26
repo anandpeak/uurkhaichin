@@ -39,10 +39,11 @@ const Advantages = ({ emp, setEmp }) => {
     <div className="text-center mb-12">
       <div className="flex items-center gap-4 mb-6">
         <div className="border border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 rounded-full flex items-end justify-center h-[54px] w-[54px]">
-          <img className="ms-4" src="/img/like.svg" alt="like" />
+          <img src="/img/serius.svg" alt="like" />
         </div>
-        <p className="text-[#1A1A1A] text-lg font-semibold w-[250px] text-start">
-          Та өөрийн давуу тал, авъяас чадвараа бичээрэй.
+        <p className="text-[#1A1A1A] text-sm font-semibold w-[250px] text-start">
+          Дараах хэсэгт өөрийн тухай хуваалцсанаар ажил олоход улам давуу талтай
+          дөхөм болох юм.
         </p>
       </div>
       <div>

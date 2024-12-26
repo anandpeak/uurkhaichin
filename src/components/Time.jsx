@@ -31,16 +31,18 @@ const Time = ({ emp, setEmp }) => {
           <p className="text-[#1A1A1A] text-lg font-semibold">Хагас цагийн </p>
         </div>
         <div
-          onClick={() => setEmp({ ...emp, workTime: "freelance" })}
+          onClick={() => setEmp({ ...emp, workTime: "Зөвлөх үйлчилгээ" })}
           className={`p-3 flex items-center gap-2 cursor-pointer border w-full mb-3 rounded-xl ${
-            emp.workTime === "freelance"
+            emp.workTime === "Зөвлөх үйлчилгээ"
               ? "border-[#324d72] bg-[#F4F6FB]"
               : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"
           }`}
         >
           <span className="text-[24px">💡</span>
 
-          <p className="text-[#1A1A1A] text-lg font-semibold">Freelance </p>
+          <p className="text-[#1A1A1A] text-lg font-semibold">
+            Зөвлөх үйлчилгээ{" "}
+          </p>
         </div>
       </div>
       <div className="mt-3">

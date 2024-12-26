@@ -1,4 +1,5 @@
 import React from "react";
+import { IoIosArrowRoundForward, IoMdArrowForward } from "react-icons/io";
 
 const Ending = () => {
   return (
@@ -15,6 +16,35 @@ const Ending = () => {
         <p className="text-[#1A1A1A] text-sm">
           Танд тун удахгүй мейлээр ажлын санал очих болно.
         </p>
+      </div>
+      <div className="mt-6">
+        <p className="font-bold mb-2">
+          Та AI ашиглан өөрийн зургаа доор үзүүлсэн шиг зуруулах боломжтой шүү.
+        </p>
+        <div className="flex items-center justify-between gap-1">
+          <div className="w-[150px] h-[200px] rounded-xl border-4 border-[#fff] border-opacity-80">
+            <img
+              className="w-full h-full object-cover rounded-xl"
+              src="/img/example.svg"
+              alt="pfp"
+            />
+          </div>
+          <IoIosArrowRoundForward className="text-xl font-bold" />
+
+          <div className="w-[150px] h-[200px] rounded-xl border-4 border-[#fff] border-opacity-80">
+            <img
+              className="w-full h-full object-cover rounded-xl"
+              src="/img/example.png"
+              alt="pfp"
+            />
+          </div>
+        </div>
+        <div className="flex items-center justify-center mt-4">
+          <button className="w-[280px] bg-[#fff] rounded-xl text-[#1E293B] p-3 flex items-center justify-center gap-2 font-bold">
+            Зурагтай болох
+            <IoMdArrowForward />
+          </button>
+        </div>
       </div>
     </div>
   );

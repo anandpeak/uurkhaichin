@@ -30,8 +30,21 @@ const Certificate = ({ emp, setEmp }) => {
 
   return (
     <div className="text-center">
+      <p className="text-[22px] text-[#1A1A1A] font-semibold mb-4">
+        Өөрийн сурсан сургаалиа бичнэ үү.
+      </p>
+      <div className="mb-6">
+        <input
+          className="w-full py-3 px-4 rounded-lg bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 text-sm"
+          onChange={(e) => {
+            setEmp({ ...emp, school: e.target.value });
+          }}
+          value={emp.school}
+          type="text"
+        />
+      </div>
       <p className="text-[22px] text-[#1A1A1A] font-semibold mb-6">
-        Мэргэжлийн сертификат байгаа юу?
+        Таньд мэргэжлийн сертификат байгаа юу?
       </p>
       <div className="flex items-center justify-between gap-2">
         <div
