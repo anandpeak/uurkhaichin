@@ -44,7 +44,7 @@ const Certificate = ({ emp, setEmp }) => {
         />
       </div>
       <p className="text-[22px] text-[#1A1A1A] font-semibold mb-6">
-        Таньд мэргэжлийн сертификат байгаа юу?
+        Танд мэргэжлийн сертификат байгаа юу?
       </p>
       <div className="flex items-center justify-between gap-2">
         <div
