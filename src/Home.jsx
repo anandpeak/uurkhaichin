@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import Background from "./Background";
+import useViewportHeight from "./hooks/useViewportHeight";
 
 //pages
 import Hello from "./components/Hello";
@@ -59,6 +60,8 @@ const Home = () => {
   const [backgroundImage, setBackgroundImage] = useState("/img/bg.svg");
   const isEmailValidCheck = isEmailValid.test(emp.mail);
 
+  useViewportHeight();
+
   useEffect(() => {
     if (page === 14) {
       setBackgroundImage("/img/bg1.svg");
@@ -116,7 +119,7 @@ const Home = () => {
 
   return (
     <Background backgroundImage={backgroundImage}>
-      <div className="flex items-center justify-center min-h-[90vh] mx-[20px]">
+      <div className="flex items-center justify-center min-h-[calc(var(--vh,1vh)*100)] mx-[20px]">
         {page !== 1 && page !== 2 && page !== 14 && page <= 15 && (
           <div
             className={`absolute ${
