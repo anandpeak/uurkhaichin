@@ -4,7 +4,7 @@ const Hellow = () => {
   return (
     <div className="text-center mb-20">
       <div className="w-[146px] h-[146px] rounded-full border-2 border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 flex items-end justify-center overflow-hidden mx-auto">
-        <img src="/img/hello.png" alt="hello" />
+        <img src="/img/hello.svg" alt="hello" />
       </div>
       <p className="text-[#1A1A1A] text-[22px] mt-6">Сайн байна уу,</p>
       <div className="mt-4">

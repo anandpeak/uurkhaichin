@@ -5,7 +5,7 @@ const Nice = () => {
     <div className="text-center">
       <div className="flex justify-center mb-6">
         <div className="h-[146px] w-[146px] rounded-full bg-[#fff] bg-opacity-30 border-2 border-[#fff] border-opacity-80 flex items-end justify-center">
-          <img src="/img/Nice.png" alt="emoji" />
+          <img src="/img/Nice.svg" alt="emoji" />
         </div>
       </div>
       <div>
