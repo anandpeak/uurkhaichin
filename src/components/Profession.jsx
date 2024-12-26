@@ -5,10 +5,10 @@ import { FaCheck } from "react-icons/fa6";
 
 const Profession = ({ emp, setEmp, all, setAll }) => {
   const prof = [
-    { name: "Машин механизмын оператор", emoji: "👷‍♂️🚜" },
-    { name: "Суурин төхөөрөмжийн оператор", emoji: "👷‍♂️🏭" },
+    { name: "Машин механизмын оператор", emoji: "🚜" },
+    { name: "Суурин төхөөрөмжийн оператор", emoji: "🏭" },
     { name: "Инженер", emoji: "👷‍♂️📐" },
-    { name: "Механик", emoji: "👷‍♂️🛠️" },
+    { name: "Механик", emoji: "🛠️" },
     { name: "Аюулгүй ажиллагаа", emoji: "🦺" },
     { name: "Гагнуур", emoji: "🧑‍🏭💥" },
   ];
