@@ -164,7 +164,7 @@ const Home = () => {
                   setPage(page - 1);
                 }
               }}
-              className={`flex items-center gap-1 text-xs ${
+              className={`flex items-center gap-1  ${
                 page === 14 ? "text-[#fff]" : "text-[#1E293B]"
               } `}
             >

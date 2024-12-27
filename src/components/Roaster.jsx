@@ -2,6 +2,7 @@ import React from "react";
 
 const Roaster = ({ emp, setEmp }) => {
   const roast = [
+    { value: "5/2", label: "5/2" },
     { value: "7/7", label: "7/7" },
     { value: "14/14", label: "14/14" },
     { value: "28/28", label: "28/28" },
