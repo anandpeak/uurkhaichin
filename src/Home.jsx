@@ -111,7 +111,7 @@ const Home = () => {
       return emp.workingDay;
     }
     if (page === 13) {
-      return emp.salary;
+      return emp.salary || emp.salaryType;
     }
     if (page === 16) {
       return emp.lastname && emp.firstname && emp.phone && isEmailValidCheck;
@@ -263,7 +263,7 @@ const Home = () => {
         )}
         {console.log(page)}
         {isButtonVisible() && page !== 15 && (
-          <div className="absolute bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
+          <div className="fixed bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
             <button
               onClick={() => {
                 if (page === 4) {

@@ -76,7 +76,7 @@ const Advantages = ({ emp, setEmp, setPage }) => {
             emp.behaviorAdvantage !== "" ||
             emp.expAdvantage !== "" ||
             emp.sportAdvantage !== ""
-              ? "border border-[#CECFD3] text-[#1E293B] bg-[#fff]"
+              ? " text-[#1E293B] bg-[#fff]"
               : "bg-[#CECFD3] text-[#fff] cursor-not-allowed"
           } rounded-lg w-[330px]`}
           disabled={

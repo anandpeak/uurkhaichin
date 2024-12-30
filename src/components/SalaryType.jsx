@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const SalaryType = ({ emp, setEmp }) => {
   const [rangeValue, setRangeValue] = useState(0);
+
+  useEffect(() => {
+    setEmp({ ...emp, salary: "8’000₮ - 10’000₮" });
+  }, [emp, setEmp]);
 
   const options = [
     { id: 0, label: "8’000₮ - 10’000₮", emoji: "🪙" },

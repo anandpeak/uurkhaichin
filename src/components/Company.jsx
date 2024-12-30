@@ -8,9 +8,18 @@ const Company = ({ emp, setEmp }) => {
 
   const selectedCompanies = emp?.experience?.company || [];
 
-  const filteredCompanies = companys.filter((company) =>
-    company.toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredCompanies = companys
+    .filter((company) => company.toLowerCase().includes(query.toLowerCase()))
+    .sort((a, b) => {
+      const lowerQuery = query.toLowerCase();
+      const aIndex = a.toLowerCase().indexOf(lowerQuery);
+      const bIndex = b.toLowerCase().indexOf(lowerQuery);
+
+      if (aIndex === 0 && bIndex !== 0) return -1;
+      if (bIndex === 0 && aIndex !== 0) return 1;
+
+      return aIndex - bIndex;
+    });
 
   return (
     <div className="text-center">
@@ -28,7 +37,7 @@ const Company = ({ emp, setEmp }) => {
         />
       </div>
       {query !== "" ? (
-        <div className="bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 rounded-xl  px-4 max-h-[220px] overflow-y-scroll">
+        <div className="bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 rounded-xl px-4 max-h-[220px] overflow-y-scroll">
           {filteredCompanies.length > 0 ? (
             <ul>
               {filteredCompanies.map((company, index) => {
@@ -36,9 +45,6 @@ const Company = ({ emp, setEmp }) => {
                   .toLowerCase()
                   .indexOf(query.toLowerCase());
                 const endIndex = startIndex + query.length;
-
-                // Check if the query is part of the company name
-                const hasMatch = startIndex !== -1;
 
                 return (
                   <li
@@ -59,7 +65,7 @@ const Company = ({ emp, setEmp }) => {
                       setQuery("");
                     }}
                   >
-                    {hasMatch ? (
+                    {startIndex !== -1 ? (
                       <>
                         {company.slice(0, startIndex)}
                         <span className="text-[#1E293B] font-semibold">

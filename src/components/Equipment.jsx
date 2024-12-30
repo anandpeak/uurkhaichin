@@ -23,6 +23,11 @@ const Equipment = ({ emp, setEmp }) => {
     { img: "/img/equipments/vehicle/blasthole.svg", name: "Blasthole drills" },
     { img: "/img/equipments/vehicle/drill.svg", name: "Hardrock drill" },
     { img: "/img/equipments/vehicle/bolter.svg", name: "Hardrock bolter" },
+    {
+      img: "/img/equipments/vehicle/chainBulldoz.svg",
+      name: "Гинжит буллдозер",
+    },
+    { img: "/img/equipments/vehicle/kran.svg", name: "Кран" },
   ];
 
   const equip = [
