@@ -52,7 +52,6 @@ const Home = () => {
     workingDay: "",
     skills: [],
     expAdvantage: "",
-    sportAdvantage: "",
     behaviorAdvantage: "",
     school: "",
     phone: "",

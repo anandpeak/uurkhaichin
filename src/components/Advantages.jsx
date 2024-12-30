@@ -16,12 +16,6 @@ const Advantages = ({ emp, setEmp, setPage }) => {
         "Жиш: Тоног төхөөрөмжтэй харьцах чадвартай, аюулгүй ажиллагаахы сургалтад хамрагдаж байсан, гагнуурын 2-р зэрэгтэй гэх мэт...",
       key: "expAdvantage",
     },
-    {
-      topic: "Урлаг спортын давуу талаа бичнэ үү.",
-      value: emp.sportAdvantage,
-      placeholder: "Жиш: Сагс тоглодог, волейбол 2-р зэрэгтэй...",
-      key: "sportAdvantage",
-    },
   ];
 
   const handleInputChange = (e, key) => {
@@ -73,17 +67,11 @@ const Advantages = ({ emp, setEmp, setPage }) => {
             setPage(18);
           }}
           className={`py-3 px-3 font-bold text-center text-[#1E293B] ${
-            emp.behaviorAdvantage !== "" ||
-            emp.expAdvantage !== "" ||
-            emp.sportAdvantage !== ""
+            emp.behaviorAdvantage !== "" || emp.expAdvantage !== ""
               ? " text-[#1E293B] bg-[#fff]"
               : "bg-[#CECFD3] text-[#fff] cursor-not-allowed"
           } rounded-lg w-[330px]`}
-          disabled={
-            emp.behaviorAdvantage === "" &&
-            emp.expAdvantage === "" &&
-            emp.sportAdvantage === ""
-          }
+          disabled={emp.behaviorAdvantage === "" && emp.expAdvantage === ""}
         >
           Үргэлжлүүлэх
         </button>
