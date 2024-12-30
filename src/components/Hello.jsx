@@ -3,6 +3,9 @@ import React from "react";
 const Hellow = () => {
   return (
     <div className="text-center mb-20">
+      <div className="absolute top-10 left-5">
+        <img className="w-[130px]" src="/longLogo.svg" alt="log" />
+      </div>
       <div className="w-[146px] h-[146px] rounded-full border-2 border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 flex items-end justify-center overflow-hidden mx-auto">
         <img className=" h-[136px]" src="/img/hello.png" alt="hello" />
       </div>
