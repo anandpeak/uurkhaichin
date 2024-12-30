@@ -163,7 +163,7 @@ const Equipment = ({ emp, setEmp }) => {
     "Агаарын чанарын мэргэжилтэн",
     "Хог хаягдлын менежер",
     "Усны нөөцийн менежер",
-    "Зэрлэг ан амьтан",
+    "Биологийн олон янз байдлын зөвлөх",
     "Био олон янз байдлын зөвлөх",
   ];
   useEffect(() => {
@@ -219,7 +219,10 @@ const Equipment = ({ emp, setEmp }) => {
       ? emp.driving?.car || []
       : major === "equip"
       ? emp.equipment
+      : major === "welding"
+      ? emp.welding || []
       : "";
+
   const isAllSelected = selectedItems.length === items.length;
 
   return (
@@ -227,7 +230,9 @@ const Equipment = ({ emp, setEmp }) => {
       <p className="text-[22px] text-[#1A1A1A] font-semibold mb-6">
         {major === "car"
           ? "Жолооддог тоног төхөөрөмжөө сонгоно уу."
-          : "Ажилладаг тоног төхөөрөмжөө сонгоно уу."}
+          : major === "equip"
+          ? "Ажилладаг тоног төхөөрөмжөө сонгоно уу."
+          : "Улам дэлгэрүүлцгээе!"}
       </p>
       {emp.major === "Машин механизмын оператор" ||
       emp.major === "Суурин төхөөрөмжийн оператор" ? (
@@ -269,7 +274,7 @@ const Equipment = ({ emp, setEmp }) => {
               <div
                 key={index}
                 tabIndex={0}
-                className={`w-[160px] h-[150px] flex items-center justify-center border rounded-xl cursor-pointer ${
+                className={`w-[48%] h-[150px] flex items-center justify-center border rounded-xl cursor-pointer ${
                   major === "engineer"
                     ? emp.workMajor === item.name
                       ? "border-[#324d72] bg-[#F4F6FB]"
@@ -316,24 +321,47 @@ const Equipment = ({ emp, setEmp }) => {
           : items.map((item, index) => (
               <div
                 onClick={() => {
-                  setEmp({ ...emp, workMajor: item });
+                  if (major === "welding") {
+                    setEmp((prev) => {
+                      const welding = prev.welding || [];
+                      const isSelected = welding.includes(item);
+                      return {
+                        ...prev,
+                        welding: isSelected
+                          ? welding.filter((w) => w !== item)
+                          : [...welding, item],
+                      };
+                    });
+                  } else {
+                    setEmp({ ...emp, workMajor: item });
+                  }
                 }}
                 key={index}
                 className={`w-full border ${
-                  emp.workMajor === item
+                  major === "welding"
+                    ? emp.welding?.includes(item)
+                      ? "border-[#324d72] bg-[#F4F6FB]"
+                      : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"
+                    : emp.workMajor === item
                     ? "border-[#324d72] bg-[#F4F6FB]"
                     : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"
                 } py-3 px-4 flex items-center gap-2 rounded-lg`}
               >
                 <div
                   className={`w-[20px] h-[20px] flex items-center justify-center p-0.5 border-2 rounded-full ${
-                    emp.workMajor === item
+                    major === "welding"
+                      ? emp.welding?.includes(item)
+                        ? "border-[#324d72]"
+                        : "border-[#fff] border-opacity-80"
+                      : emp.workMajor === item
                       ? "border-[#324d72]"
                       : "border-[#fff] border-opacity-80"
                   }`}
                 >
-                  {emp.workMajor === item && (
+                  {emp.welding?.includes(item) || emp.workMajor === item ? (
                     <div className="w-full h-full bg-[#324d72] rounded-full"></div>
+                  ) : (
+                    ""
                   )}
                 </div>
                 <p className="text-lg font-semibold text-[#1E293B]">{item}</p>

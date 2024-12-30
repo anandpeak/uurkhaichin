@@ -48,14 +48,14 @@ const Profession = ({ emp, setEmp, all, setAll }) => {
       ) : (
         <div>
           {" "}
-          <div className="flex flex-wrap justify-between gap-2 items-center">
+          <div className="flex flex-wrap  gap-3 items-center">
             {prof.map((item, index) => (
               <div
                 onClick={() => {
                   setEmp({ ...emp, major: item.name });
                 }}
                 key={index}
-                className={`w-[160px] h-[125px] flex flex-col justify-center items-center rounded-xl border ${
+                className={`w-[48%] h-[125px] flex flex-col justify-center items-center rounded-xl border ${
                   emp.major === item.name
                     ? "border-[#324d72] bg-[#F4F6FB] text-[#1E293B]"
                     : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 text-[#1A1A1A]"

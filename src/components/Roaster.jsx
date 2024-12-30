@@ -14,7 +14,7 @@ const Roaster = ({ emp, setEmp }) => {
       <p className="text-[22px] text-[#1A1A1A] mb-6 font-semibold">
         Одоогийн ростер тань хэд хоног үргэлжилдэг вэ?
       </p>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 h-[300px] overflow-y-scroll">
         {roast.map((option) => (
           <div
             key={option.value}

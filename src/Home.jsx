@@ -23,6 +23,7 @@ import Time from "./components/Time";
 import Serius from "./components/Serius";
 import CV from "./components/CV";
 import Certificate from "./components/Certificate";
+import SalaryType from "./components/SalaryType";
 
 const Home = () => {
   const [all, setAll] = useState(false);
@@ -38,10 +39,12 @@ const Home = () => {
       license: [],
     },
     equipment: [],
+    welding: [],
     certificate: "",
     certificateImg: "",
     workTime: "",
     workRange: "",
+    salaryType: "",
     salary: "",
     workingRoster: "",
     workingDay: "",
@@ -54,6 +57,7 @@ const Home = () => {
     firstname: "",
     mail: "",
     photo: "",
+    isDisabled: false,
   });
 
   // State for background image
@@ -75,26 +79,27 @@ const Home = () => {
       return emp.situation;
     }
     if (page === 4) {
-      return emp.experience.year;
-    }
-    if (page === 5) {
-      return emp.experience.company?.length > 0 ? true : false;
-    }
-    if (page === 6) {
       return emp.major;
     }
-    if (page === 7) {
+    if (page === 5) {
       return (
         emp.equipment?.length > 0 ||
         emp.driving.car?.length > 0 ||
+        emp.welding.length > 0 ||
         emp.workMajor
       );
     }
-    if (page === 8) {
+    if (page === 6) {
       return emp.driving.license?.length > 0;
     }
-    if (page === 9) {
+    if (page === 7) {
       return emp.certificate;
+    }
+    if (page === 8) {
+      return emp.experience.year;
+    }
+    if (page === 9) {
+      return emp.experience.company?.length > 0 ? true : false;
     }
     if (page === 10) {
       return emp.workTime && emp.workRange;
@@ -119,7 +124,7 @@ const Home = () => {
 
   return (
     <Background backgroundImage={backgroundImage}>
-      <div className="flex items-center justify-center min-h-[calc(var(--vh,1vh)*100)] mx-[20px]">
+      <div className="flex flex-col items-center justify-center min-h-[calc(var(--vh,1vh)*100)] mx-[20px]">
         {page !== 1 && page !== 2 && page !== 14 && page <= 15 && (
           <div
             className={`absolute ${
@@ -131,28 +136,39 @@ const Home = () => {
                 if (all) {
                   setAll(false);
                   return;
-                } else if (page === 6 && emp.experience.year === "0") {
-                  setPage(page - 2);
-                } else if (page === 8) {
+                } else if (page === 7) {
                   if (emp.major === "Машин механизмын оператор") {
-                    setPage(7);
-                  } else {
                     setPage(6);
-                  }
-                } else if (page === 9) {
-                  if (emp.major === "Инженер") {
-                    setPage(7);
                   } else {
-                    setPage(8);
+                    setPage(5);
                   }
-                } else if (page === 10) {
+                } else if (page === 8) {
                   if (
                     emp.major === "Машин механизмын оператор" ||
-                    emp.major === "Инженер"
+                    emp.major === "Суурин төхөөрөмжийн оператор" ||
+                    emp.major === "Гагнуур" ||
+                    emp.major === "Механик"
                   ) {
-                    setPage(9);
+                    setPage(7);
                   } else {
-                    setPage(6);
+                    if (
+                      emp.major === "Машин механизмын оператор" ||
+                      emp.major === "Суурин төхөөрөмжийн оператор" ||
+                      emp.major === "Инженер" ||
+                      emp.major === "Механик" ||
+                      emp.major === "Аюулгүй ажиллагаа" ||
+                      emp.major === "Гагнуур"
+                    ) {
+                      setPage(5);
+                    } else {
+                      setPage(4);
+                    }
+                  }
+                } else if (page === 10) {
+                  if (emp.experience.year === "0") {
+                    setPage(8);
+                  } else {
+                    setPage(9);
                   }
                 } else if (page === 13) {
                   if (emp.situation === "temporary") {
@@ -213,17 +229,17 @@ const Home = () => {
         ) : page === 3 ? (
           <Nice />
         ) : page === 4 ? (
-          <Experience emp={emp} setEmp={setEmp} />
-        ) : page === 5 ? (
-          <Company emp={emp} setEmp={setEmp} />
-        ) : page === 6 ? (
           <Profession emp={emp} setEmp={setEmp} all={all} setAll={setAll} />
-        ) : page === 7 ? (
+        ) : page === 5 ? (
           <Equipment emp={emp} setEmp={setEmp} />
-        ) : page === 8 ? (
+        ) : page === 6 ? (
           <License emp={emp} setEmp={setEmp} />
-        ) : page === 9 ? (
+        ) : page === 7 ? (
           <Certificate emp={emp} setEmp={setEmp} />
+        ) : page === 8 ? (
+          <Experience emp={emp} setEmp={setEmp} />
+        ) : page === 9 ? (
+          <Company emp={emp} setEmp={setEmp} />
         ) : page === 10 ? (
           <Time emp={emp} setEmp={setEmp} />
         ) : page === 11 ? (
@@ -231,28 +247,26 @@ const Home = () => {
         ) : page === 12 ? (
           <WorkDay emp={emp} setEmp={setEmp} />
         ) : page === 13 ? (
-          <Salary emp={emp} setEmp={setEmp} />
+          emp.situation === "temporary" ? (
+            <SalaryType emp={emp} setEmp={setEmp} />
+          ) : (
+            <Salary emp={emp} setEmp={setEmp} />
+          )
         ) : page === 14 ? (
           <Serius />
         ) : page === 15 ? (
-          <Advantages emp={emp} setEmp={setEmp} />
+          <Advantages emp={emp} setEmp={setEmp} setPage={setPage} />
         ) : page === 16 ? (
           <CV emp={emp} setEmp={setEmp} />
         ) : (
           <Ending />
         )}
         {console.log(page)}
-        <div className="absolute bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
-          {isButtonVisible() && page !== 15 && (
+        {isButtonVisible() && page !== 15 && (
+          <div className="absolute bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
             <button
               onClick={() => {
                 if (page === 4) {
-                  if (emp.experience.year !== "0") {
-                    setPage(page + 1);
-                  } else {
-                    setPage(6);
-                  }
-                } else if (page === 6) {
                   if (
                     emp.major === "Машин механизмын оператор" ||
                     emp.major === "Суурин төхөөрөмжийн оператор" ||
@@ -261,19 +275,29 @@ const Home = () => {
                     emp.major === "Аюулгүй ажиллагаа" ||
                     emp.major === "Гагнуур"
                   ) {
-                    setPage(7);
+                    setPage(5);
                   } else {
-                    setPage(10);
-                  }
-                } else if (page === 7) {
-                  if (emp.major === "Машин механизмын оператор") {
                     setPage(8);
+                  }
+                } else if (page === 5) {
+                  if (emp.major === "Машин механизмын оператор") {
+                    setPage(6);
                   } else {
-                    if (emp.major === "Инженер") {
-                      setPage(9);
+                    if (
+                      emp.major === "Суурин төхөөрөмжийн оператор" ||
+                      emp.major === "Гагнуур" ||
+                      emp.major === "Механик"
+                    ) {
+                      setPage(7);
                     } else {
-                      setPage(10);
+                      setPage(8);
                     }
+                  }
+                } else if (page === 8) {
+                  if (emp.experience.year === "0") {
+                    setPage(10);
+                  } else {
+                    setPage(9);
                   }
                 } else if (page === 12) {
                   if (emp.situation === "permanent") {
@@ -297,40 +321,9 @@ const Home = () => {
                 ? "Илгээх"
                 : "Үргэлжлүүлэх"}
             </button>
-          )}
-          {page === 15 && (
-            <div className="flex flex-col justify-center">
-              <button
-                onClick={() => {
-                  setPage(page + 1);
-                }}
-                className="py-3 px-3 text-center text-[#1E293B] border border-[#fff] rounded-lg w-[330px] mb-2"
-              >
-                Алгасах
-              </button>
-              <button
-                onClick={() => {
-                  setPage(page + 1);
-                }}
-                className={`py-3 px-3 font-bold text-center text-[#1E293B] ${
-                  emp.behaviorAdvantage !== "" ||
-                  emp.expAdvantage !== "" ||
-                  emp.sportAdvantage !== ""
-                    ? "border border-[#CECFD3] text-[#1E293B] bg-[#fff]"
-                    : "bg-[#CECFD3] text-[#fff] cursor-not-allowed"
-                } rounded-lg w-[330px]`}
-                disabled={
-                  emp.behaviorAdvantage === "" &&
-                  emp.expAdvantage === "" &&
-                  emp.sportAdvantage === ""
-                }
-              >
-                Үргэлжлүүлэх
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
+          </div>
+        )}
+      </div>{" "}
     </Background>
   );
 };

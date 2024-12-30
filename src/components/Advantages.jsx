@@ -1,6 +1,6 @@
 import React from "react";
 
-const Advantages = ({ emp, setEmp }) => {
+const Advantages = ({ emp, setEmp, setPage }) => {
   const slide = [
     {
       topic: "Хувийн зан төлөвийн давуу талаа бичнэ үү.",
@@ -36,7 +36,7 @@ const Advantages = ({ emp, setEmp }) => {
   };
 
   return (
-    <div className="text-center mb-12">
+    <div className="text-center mb-4 pt-20">
       <div className="flex items-center gap-4 mb-6">
         <div className="border border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 rounded-full flex items-end justify-center h-[54px] w-[54px]">
           <img src="/img/serius.svg" alt="like" />
@@ -58,6 +58,35 @@ const Advantages = ({ emp, setEmp }) => {
             ></textarea>
           </div>
         ))}
+      </div>
+      <div className="flex flex-col justify-center">
+        <button
+          onClick={() => {
+            setPage(16);
+          }}
+          className="py-3 px-3 text-center text-[#1E293B] border border-[#fff] rounded-lg w-[330px] mb-2"
+        >
+          Алгасах
+        </button>
+        <button
+          onClick={() => {
+            setPage(16);
+          }}
+          className={`py-3 px-3 font-bold text-center text-[#1E293B] ${
+            emp.behaviorAdvantage !== "" ||
+            emp.expAdvantage !== "" ||
+            emp.sportAdvantage !== ""
+              ? "border border-[#CECFD3] text-[#1E293B] bg-[#fff]"
+              : "bg-[#CECFD3] text-[#fff] cursor-not-allowed"
+          } rounded-lg w-[330px]`}
+          disabled={
+            emp.behaviorAdvantage === "" &&
+            emp.expAdvantage === "" &&
+            emp.sportAdvantage === ""
+          }
+        >
+          Үргэлжлүүлэх
+        </button>
       </div>
     </div>
   );

@@ -80,6 +80,20 @@ const CV = ({ emp, setEmp }) => {
             </p>
           )}
         </div>
+        <div
+          onClick={() => {
+            setEmp({ ...emp, isDisabled: !emp.isDisabled });
+          }}
+          className="flex items-center gap-2 cursor-pointer"
+        >
+          <input
+            type="checkbox"
+            checked={emp.isDisabled}
+            onChange={() => setEmp({ ...emp, isDisabled: !emp.isDisabled })}
+            className="cursor-pointer w-[20px] h-[20px] rounded-sm "
+          />
+          <p className="text-[#1A1A1A]">Хөгжлийн бэрхшээлтэй иргэн</p>
+        </div>
       </form>
     </div>
   );
