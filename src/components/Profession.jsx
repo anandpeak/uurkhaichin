@@ -14,18 +14,18 @@ const Profession = ({ emp, setEmp, all, setAll }) => {
   ];
 
   return (
-    <div className="text-center">
+    <div className="text-center w-full">
       <p className="text-[22px] text-[#1A1A1A] font-semibold mb-6">
         Өөрийн мэргэжлээ сонгоно уу.
       </p>
       {all ? (
-        <div className="border border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 max-h-[400px] overflow-y-scroll rounded-lg">
+        <div className="border border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 max-h-[400px] overflow-y-scroll rounded-lg w-full">
           {profs.map((item, index) => (
             <div
               onClick={() => {
                 setEmp({ ...emp, major: item });
               }}
-              className={`py-3 px-4 cursor-pointer flex items-center justify-between gap-2 ${
+              className={`py-3 px-4 cursor-pointer flex items-center justify-between gap-2 w-full ${
                 index !== 0 ? "border-t border-[#CECFD3]" : ""
               }`}
             >
