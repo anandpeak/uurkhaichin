@@ -12,6 +12,11 @@ const Equipment = ({ emp, setEmp }) => {
     { img: "/img/equipments/vehicle/hovo.svg", name: "Хово/Dump truck" },
     { img: "/img/equipments/vehicle/dump.svg", name: "Дамп/Mining dump truck" },
     {
+      img: "/img/equipments/vehicle/chainBulldoz.svg",
+      name: "Гинжит буллдозер",
+    },
+    { img: "/img/equipments/vehicle/kran.svg", name: "Кран" },
+    {
       img: "/img/equipments/vehicle/shovelExcavator.svg",
       name: "Шоул Экскаватор / Shovel excavator",
     },
@@ -23,11 +28,6 @@ const Equipment = ({ emp, setEmp }) => {
     { img: "/img/equipments/vehicle/blasthole.svg", name: "Blasthole drills" },
     { img: "/img/equipments/vehicle/drill.svg", name: "Hardrock drill" },
     { img: "/img/equipments/vehicle/bolter.svg", name: "Hardrock bolter" },
-    {
-      img: "/img/equipments/vehicle/chainBulldoz.svg",
-      name: "Гинжит буллдозер",
-    },
-    { img: "/img/equipments/vehicle/kran.svg", name: "Кран" },
   ];
 
   const equip = [

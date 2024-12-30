@@ -62,7 +62,7 @@ const Advantages = ({ emp, setEmp, setPage }) => {
       <div className="flex flex-col justify-center">
         <button
           onClick={() => {
-            setPage(16);
+            setPage(18);
           }}
           className="py-3 px-3 text-center text-[#1E293B] border border-[#fff] rounded-lg w-[330px] mb-2"
         >
@@ -70,7 +70,7 @@ const Advantages = ({ emp, setEmp, setPage }) => {
         </button>
         <button
           onClick={() => {
-            setPage(16);
+            setPage(18);
           }}
           className={`py-3 px-3 font-bold text-center text-[#1E293B] ${
             emp.behaviorAdvantage !== "" ||

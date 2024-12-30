@@ -17,7 +17,9 @@ import WorkDay from "./components/WorkDay";
 import Salary from "./components/Salary";
 import Advantages from "./components/Advantages";
 import Ending from "./components/Ending";
+import School from "./components/School";
 
+import Skills from "./components/Skills";
 import License from "./components/License";
 import Time from "./components/Time";
 import Serius from "./components/Serius";
@@ -48,6 +50,7 @@ const Home = () => {
     salary: "",
     workingRoster: "",
     workingDay: "",
+    skills: [],
     expAdvantage: "",
     sportAdvantage: "",
     behaviorAdvantage: "",
@@ -67,7 +70,7 @@ const Home = () => {
   useViewportHeight();
 
   useEffect(() => {
-    if (page === 14) {
+    if (page === 15) {
       setBackgroundImage("/img/bg1.svg");
     } else {
       setBackgroundImage("/img/bg.svg");
@@ -95,28 +98,32 @@ const Home = () => {
     if (page === 7) {
       return emp.certificate;
     }
-    if (page === 8) {
+
+    if (page === 9) {
       return emp.experience.year;
     }
-    if (page === 9) {
+    if (page === 10) {
       return emp.experience.company?.length > 0 ? true : false;
     }
-    if (page === 10) {
+    if (page === 11) {
       return emp.workTime && emp.workRange;
     }
-    if (page === 11) {
+    if (page === 12) {
       return emp.workingRoster;
     }
-    if (page === 12) {
+    if (page === 13) {
       return emp.workingDay;
     }
-    if (page === 13) {
+    if (page === 14) {
       return emp.salary || emp.salaryType;
     }
     if (page === 16) {
+      return emp.skills.length > 0;
+    }
+    if (page === 18) {
       return emp.lastname && emp.firstname && emp.phone && isEmailValidCheck;
     }
-    if (page > 16) {
+    if (page > 18) {
       return false;
     }
     return true;
@@ -125,10 +132,10 @@ const Home = () => {
   return (
     <Background backgroundImage={backgroundImage}>
       <div className="flex flex-col items-center justify-center min-h-[calc(var(--vh,1vh)*100)] mx-[20px]">
-        {page !== 1 && page !== 2 && page !== 14 && page <= 15 && (
+        {page !== 1 && page !== 2 && page !== 15 && page <= 17 && (
           <div
             className={`absolute ${
-              page === 16 ? "top-[40px]" : "top-[40px]"
+              page === 17 ? "top-[40px]" : "top-[40px]"
             } left-[20px]`}
           >
             <button
@@ -150,45 +157,39 @@ const Home = () => {
                     emp.major === "Механик"
                   ) {
                     setPage(7);
+                  } else if (
+                    emp.major === "Инженер" ||
+                    emp.major === "Аюулгүй ажиллагаа"
+                  ) {
+                    setPage(5);
                   } else {
-                    if (
-                      emp.major === "Машин механизмын оператор" ||
-                      emp.major === "Суурин төхөөрөмжийн оператор" ||
-                      emp.major === "Инженер" ||
-                      emp.major === "Механик" ||
-                      emp.major === "Аюулгүй ажиллагаа" ||
-                      emp.major === "Гагнуур"
-                    ) {
-                      setPage(5);
-                    } else {
-                      setPage(4);
-                    }
+                    setPage(4);
                   }
-                } else if (page === 10) {
+                } else if (page === 11) {
                   if (emp.experience.year === "0") {
-                    setPage(8);
-                  } else {
                     setPage(9);
-                  }
-                } else if (page === 13) {
-                  if (emp.situation === "temporary") {
-                    setPage(12);
                   } else {
                     setPage(10);
+                  }
+                } else if (page === 14) {
+                  if (emp.situation === "temporary") {
+                    setPage(13);
+                  } else {
+                    setPage(11);
                   }
                 } else {
                   setPage(page - 1);
                 }
               }}
               className={`flex items-center gap-1  ${
-                page === 14 ? "text-[#fff]" : "text-[#1E293B]"
+                page === 15 ? "text-[#fff]" : "text-[#1E293B]"
               } `}
             >
               <MdKeyboardArrowLeft className="text-base" /> Буцах
             </button>
           </div>
         )}
-        {page > 3 && page < 14 && (
+        {page > 3 && page < 15 && (
           <div className="flex items-center absolute top-[46px] left-1/2 transform -translate-x-1/2  gap-2">
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
@@ -207,17 +208,17 @@ const Home = () => {
             />
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
-                page >= 10 ? "bg-[#1A1A1A]" : "bg-[#fff]"
-              }`}
-            />
-            <div
-              className={`w-[22px] h-[4px] rounded-lg ${
-                page >= 12 ? "bg-[#1A1A1A]" : "bg-[#fff]"
+                page >= 11 ? "bg-[#1A1A1A]" : "bg-[#fff]"
               }`}
             />
             <div
               className={`w-[22px] h-[4px] rounded-lg ${
                 page >= 13 ? "bg-[#1A1A1A]" : "bg-[#fff]"
+              }`}
+            />
+            <div
+              className={`w-[22px] h-[4px] rounded-lg ${
+                page >= 14 ? "bg-[#1A1A1A]" : "bg-[#fff]"
               }`}
             />
           </div>
@@ -237,32 +238,36 @@ const Home = () => {
         ) : page === 7 ? (
           <Certificate emp={emp} setEmp={setEmp} />
         ) : page === 8 ? (
-          <Experience emp={emp} setEmp={setEmp} />
+          <School emp={emp} setEmp={setEmp} />
         ) : page === 9 ? (
-          <Company emp={emp} setEmp={setEmp} />
+          <Experience emp={emp} setEmp={setEmp} />
         ) : page === 10 ? (
-          <Time emp={emp} setEmp={setEmp} />
+          <Company emp={emp} setEmp={setEmp} />
         ) : page === 11 ? (
-          <Roaster emp={emp} setEmp={setEmp} />
+          <Time emp={emp} setEmp={setEmp} />
         ) : page === 12 ? (
-          <WorkDay emp={emp} setEmp={setEmp} />
+          <Roaster emp={emp} setEmp={setEmp} />
         ) : page === 13 ? (
+          <WorkDay emp={emp} setEmp={setEmp} />
+        ) : page === 14 ? (
           emp.situation === "temporary" ? (
             <SalaryType emp={emp} setEmp={setEmp} />
           ) : (
             <Salary emp={emp} setEmp={setEmp} />
           )
-        ) : page === 14 ? (
-          <Serius />
         ) : page === 15 ? (
-          <Advantages emp={emp} setEmp={setEmp} setPage={setPage} />
+          <Serius />
         ) : page === 16 ? (
+          <Skills emp={emp} setEmp={setEmp} />
+        ) : page === 17 ? (
+          <Advantages emp={emp} setEmp={setEmp} setPage={setPage} />
+        ) : page === 18 ? (
           <CV emp={emp} setEmp={setEmp} />
         ) : (
           <Ending />
         )}
         {console.log(page)}
-        {isButtonVisible() && page !== 15 && (
+        {isButtonVisible() && page !== 17 && (
           <div className="fixed bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
             <button
               onClick={() => {
@@ -293,17 +298,20 @@ const Home = () => {
                       setPage(8);
                     }
                   }
-                } else if (page === 8) {
+                } else if (page === 9) {
                   if (emp.experience.year === "0") {
+                    setPage(11);
+                  } else {
                     setPage(10);
-                  } else {
-                    setPage(9);
                   }
-                } else if (page === 12) {
-                  if (emp.situation === "permanent") {
-                    setPage(13);
+                } else if (page === 11) {
+                  if (
+                    emp.situation === "permanent" ||
+                    emp.situation === "retired"
+                  ) {
+                    setPage(14);
                   } else {
-                    setPage(page + 1);
+                    setPage(12);
                   }
                 } else {
                   setPage(page + 1);
@@ -315,9 +323,9 @@ const Home = () => {
             >
               {page === 1
                 ? "Эхлүүлэх"
-                : page === 14
-                ? "Бэлэн"
                 : page === 15
+                ? "Бэлэн"
+                : page === 17
                 ? "Илгээх"
                 : "Үргэлжлүүлэх"}
             </button>

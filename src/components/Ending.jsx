@@ -16,7 +16,7 @@ const Ending = () => {
     <div className="text-center mb-[180px]">
       <div className="flex justify-center">
         <div className="w-[145px] h-[145px] rounded-full bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 flex items-end">
-          <img src="/img/ending.svg" alt="serius" />
+          <img src="/img/ending.png" alt="serius" />
         </div>
       </div>
       <div className="mt-6">
