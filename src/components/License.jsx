@@ -32,7 +32,7 @@ const License = ({ emp, setEmp }) => {
             </p>
           ))
         ) : (
-          <p>Сонголт хийгдээгүй байна</p>
+          <p className="text-opacity-70">Сонголт хийгдээгүй байна</p>
         )}
       </div>
 

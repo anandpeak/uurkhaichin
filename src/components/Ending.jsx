@@ -20,7 +20,7 @@ const Ending = () => {
         </div>
       </div>
       <div className="mt-6">
-        <p className="text-[#1A1A1A] text-[22px] font-semibold mb-6">
+        <p className="text-[#1A1A1A] text-[22px] font-semibold mb-3">
           Идэвхитэй хариулсанд баяр хүргэе!
         </p>
         <p className="text-[#1A1A1A] text-sm">
