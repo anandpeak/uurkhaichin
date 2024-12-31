@@ -5,7 +5,7 @@ const Advantages = ({ emp, setEmp, setPage }) => {
     <div className="text-center pb-10">
       <div className="flex justify-center">
         <div className="w-[145px] h-[145px]">
-          <img src="/img/serius.svg" alt="serius" />
+          <img src="/img/serius.png" alt="serius" />
         </div>
       </div>
       <p className="text-lg text-[#1A1A1A] font-semibold mt-2 mb-6">

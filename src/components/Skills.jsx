@@ -77,10 +77,10 @@ const Skills = ({ emp, setEmp, setPage }) => {
     <div className="relative">
       {!focusedOnce && (
         <div className="flex items-center gap-2 mb-6">
-          <div className="border border-[#fff] rounded-full">
-            <img src="/img/serius.svg" alt="png" />
+          <div className="border w-[50px] h-[50px]  border-[#fff] rounded-full">
+            <img src="/img/serius.png" alt="png" />
           </div>
-          <p className="text-[#1A1A1A] font-bold text-sm ">
+          <p className="text-[#1A1A1A] font-bold text-sm w-[80%]">
             Дараах хэсэгт өөрийн тухай хуваалцсанаар ажил олоход улам давуу
             талтай дөхөм болох юм.
           </p>
@@ -94,7 +94,7 @@ const Skills = ({ emp, setEmp, setPage }) => {
           }`}
         >
           <p className="text-sm mb-2">
-            Ашигладаг багаж хэрэгсэл, компьютерийн программыуд
+            Ашигладаг багаж хэрэгсэл, компьютерын программууд
           </p>
           <div className="mb-6">
             <div className="relative flex items-center">
