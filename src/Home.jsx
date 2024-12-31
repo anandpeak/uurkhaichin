@@ -53,9 +53,9 @@ const Home = () => {
     salary: "",
     workingRoster: "",
     workingDay: "",
-    skills: [],
-    expAdvantage: "",
-    behaviorAdvantage: "",
+    softSkills: [],
+    techSkills: [],
+    detailSkills: "",
     school: "",
     phone: "",
     lastname: "",
@@ -122,9 +122,7 @@ const Home = () => {
     if (page === 14) {
       return emp.salary || emp.salaryType;
     }
-    if (page === 16) {
-      return emp.skills.length > 0;
-    }
+
     if (page === 18) {
       return (
         emp.lastname &&
@@ -272,7 +270,7 @@ const Home = () => {
         ) : page === 15 ? (
           <Serius />
         ) : page === 16 ? (
-          <Skills emp={emp} setEmp={setEmp} />
+          <Skills emp={emp} setEmp={setEmp} setPage={setPage} />
         ) : page === 17 ? (
           <Advantages emp={emp} setEmp={setEmp} setPage={setPage} />
         ) : page === 18 ? (
@@ -287,7 +285,7 @@ const Home = () => {
           ""
         )}
         {console.log(page)}
-        {isButtonVisible() && page !== 17 && (
+        {isButtonVisible() && page !== 16 && (
           <div className="fixed bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
             <button
               onClick={() => {
@@ -341,13 +339,7 @@ const Home = () => {
                 page === 1 ? "mb-20" : ""
               }`}
             >
-              {page === 1
-                ? "Эхлүүлэх"
-                : page === 15
-                ? "Бэлэн"
-                : page === 17
-                ? "Илгээх"
-                : "Үргэлжлүүлэх"}
+              {page === 1 ? "Эхлүүлэх" : page === 15 ? "Бэлэн" : "Үргэлжлүүлэх"}
             </button>
           </div>
         )}

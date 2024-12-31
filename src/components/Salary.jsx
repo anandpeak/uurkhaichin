@@ -16,6 +16,12 @@ const Salary = ({ emp, setEmp }) => {
     setRangeValue(newValue);
     setEmp({ ...emp, salary: options[newValue].label });
   };
+
+  const handleOptionClick = (index) => {
+    setRangeValue(index); // Set range value based on clicked option
+    setEmp({ ...emp, salary: options[index].label });
+  };
+
   const progressPercentage = (rangeValue / (options.length - 1)) * 100;
 
   return (
@@ -44,6 +50,7 @@ const Salary = ({ emp, setEmp }) => {
             className={`flex flex-col items-center ${
               rangeValue >= index ? "text-[#F88F00]" : "text-gray-400"
             } transition-colors duration-300`}
+            onClick={() => handleOptionClick(index)} // Add click handler
           >
             <span className="text-3xl">{option.emoji}</span>
             <span className="mt-1 text-sm font-medium text-center">

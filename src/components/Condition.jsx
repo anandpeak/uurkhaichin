@@ -64,7 +64,7 @@ const Condition = ({ emp, setEmp }) => {
         onClick={() => {
           setEmp({ ...emp, situation: "retired" });
         }}
-        className={`w-full flex items-center justify-center gap-2 border rounded-xl p-3 mt-4 ${
+        className={`w-full flex items-center  gap-2 border rounded-xl p-3 mt-4 ${
           emp.situation === "retired"
             ? "border-[#324d72] bg-[#F4F6FB]"
             : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"

@@ -84,7 +84,7 @@ const Generate = ({ setPage }) => {
       {/* Image Upload */}
       <div className="mb-4">
         <p className="text-[#1A1A1A] mb-2 text-lg">
-          Өөрийн царай тод гарсан зургаа оруулна уу. /заавал биш/
+          Өөрийн царай тод гарсан зургаа оруулна уу.
         </p>
         <div
           style={{ border: "2px dashed #ABADB5" }}

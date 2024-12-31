@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Certificate = ({ emp, setEmp }) => {
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleImageUpload = (event) => {
+  const handleImageUpload = async (event) => {
     const files = Array.from(event.target.files);
     const maxSize = 25 * 1024 * 1024;
 
@@ -19,18 +21,44 @@ const Certificate = ({ emp, setEmp }) => {
     });
 
     if (newImages.length > 0) {
-      newImages.forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setImages((prevImages) => [...prevImages, reader.result]);
-          setEmp({
-            ...emp,
-            certificateImgs: [...(emp.certificateImgs || []), reader.result],
-          });
-        };
-        reader.readAsDataURL(file);
-      });
       setError("");
+      setLoading(true);
+
+      const uploadedImages = [];
+
+      for (let i = 0; i < newImages.length; i++) {
+        const file = newImages[i];
+        console.log(file);
+        const formData = new FormData();
+        formData.append("file", file);
+        console.log("formdata", formData);
+        try {
+          const response = await axios.post(
+            "https://metacogserver.azurewebsites.net/v1/photo-upload",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          console.log("formdata", formData);
+          const imageUrl = response.data.url;
+          uploadedImages.push(imageUrl);
+
+          setEmp((prevEmp) => ({
+            ...prevEmp,
+            certificateImgs: [...(prevEmp.certificateImgs || []), imageUrl],
+          }));
+
+          setImages((prevImages) => [...prevImages, imageUrl]);
+        } catch (err) {
+          setError("Тамгалт явуулахад алдаа гарлаа.");
+          console.error("Error uploading image:", err);
+        }
+      }
+
+      setLoading(false);
     }
   };
 
@@ -45,21 +73,8 @@ const Certificate = ({ emp, setEmp }) => {
 
   return (
     <div className={`text-center ${images.length > 2 ? "py-20" : ""}`}>
-      {/* <p className="text-[22px] text-[#1A1A1A] font-semibold mb-4">
-        Өөрийн сурсан сургууль аа бичнэ үү.
-      </p>
-      <div className="mb-6">
-        <input
-          className="w-full py-3 px-4 rounded-lg bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 text-sm"
-          onChange={(e) => {
-            setEmp({ ...emp, school: e.target.value });
-          }}
-          value={emp.school}
-          type="text"
-        />
-      </div> */}
       <p className="text-[22px] text-[#1A1A1A] font-semibold mb-6">
-        Танд мэргэжлийн сертификат байгаа юу?
+        Танд мэргэжлийн сертификат байгаа уу?
       </p>
       <div className="flex items-center justify-between gap-2">
         <div
@@ -109,6 +124,7 @@ const Certificate = ({ emp, setEmp }) => {
           <p className="text-lg text-[#1E293B] font-semibold">Байхгүй</p>
         </div>
       </div>
+
       {emp.certificate === "yes" && (
         <div>
           <p className="text-start text-lg text-[#1A1A1A] mb-2">
@@ -152,6 +168,7 @@ const Certificate = ({ emp, setEmp }) => {
                     onChange={handleImageUpload}
                     className="hidden"
                     id="fileUpload"
+                    disabled={loading} // Disable input while uploading
                   />
                 </label>
               </div>
@@ -179,8 +196,15 @@ const Certificate = ({ emp, setEmp }) => {
                   onChange={handleImageUpload}
                   className="hidden"
                   id="fileUpload"
+                  disabled={loading} // Disable input while uploading
                 />
               </label>
+            </div>
+          )}
+          {loading && (
+            <div className="flex justify-center items-center mt-4">
+              <div className="spinner-border animate-spin w-10 h-10 border-4 border-t-4 border-blue-500 rounded-full"></div>
+              <p className="text-[#575763] ml-2">Тамгалт илгээж байна...</p>
             </div>
           )}
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
