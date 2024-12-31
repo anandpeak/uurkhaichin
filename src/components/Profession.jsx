@@ -16,7 +16,7 @@ const Profession = ({ emp, setEmp, all, setAll }) => {
   return (
     <div className="text-center w-full">
       <p className="text-[22px] text-[#1A1A1A] font-semibold mb-6">
-        Өөрийн мэргэжлээ сонгоно уу.
+        Ямар мэргэжлээр ажил хайж байгаагаа сонгоно уу.
       </p>
       {all ? (
         <div className="border border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30 max-h-[400px] overflow-y-scroll rounded-lg w-full">
