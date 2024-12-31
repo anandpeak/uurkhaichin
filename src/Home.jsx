@@ -31,7 +31,7 @@ import Generating from "./components/Generating";
 
 const Home = () => {
   const [all, setAll] = useState(false);
-  const [page, setPage] = useState(7);
+  const [page, setPage] = useState(1);
   const isEmailValid = /\S+@\S+\.\S+/;
   const isCyrillic = /^[\u0400-\u04FF\s]+$/;
   const [emp, setEmp] = useState({
