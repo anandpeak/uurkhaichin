@@ -4,6 +4,7 @@ import { MdMailOutline } from "react-icons/md";
 
 const CV = ({ emp, setEmp }) => {
   const isEmailValid = /\S+@\S+\.\S+/;
+  const isCyrillic = /^[\u0400-\u04FF\s]+$/;
 
   const handleInputChange = (e, field) => {
     setEmp({
@@ -11,7 +12,12 @@ const CV = ({ emp, setEmp }) => {
       [field]: e.target.value,
     });
   };
+
   const isEmailValidCheck = isEmailValid.test(emp.mail);
+  const isLastnameValid = isCyrillic.test(emp.lastname) || emp.lastname === "";
+  const isFirstnameValid =
+    isCyrillic.test(emp.firstname) || emp.firstname === "";
+  const isPhoneValid = emp.phone.length === 8;
 
   return (
     <div className="text-center">
@@ -32,6 +38,11 @@ const CV = ({ emp, setEmp }) => {
               onChange={(e) => handleInputChange(e, "phone")}
             />
           </div>
+          {!isPhoneValid && emp.phone !== "" && (
+            <p className="text-xs text-red-500 mt-1">
+              Утасны дугаар 8 оронтой байх ёстой.
+            </p>
+          )}
         </div>
 
         {/* Last Name */}
@@ -46,6 +57,11 @@ const CV = ({ emp, setEmp }) => {
               onChange={(e) => handleInputChange(e, "lastname")}
             />
           </div>
+          {!isLastnameValid && (
+            <p className="text-xs text-red-500 mt-1">
+              Зөвхөн кирил үсгээр бичнэ үү.
+            </p>
+          )}
         </div>
 
         {/* First Name */}
@@ -60,8 +76,14 @@ const CV = ({ emp, setEmp }) => {
               onChange={(e) => handleInputChange(e, "firstname")}
             />
           </div>
+          {!isFirstnameValid && (
+            <p className="text-xs text-red-500 mt-1">
+              Зөвхөн кирил үсгээр бичнэ үү.
+            </p>
+          )}
         </div>
 
+        {/* Email */}
         <div className="mb-4">
           <p className="text-sm text-[#1A1A1A]">Мейл хаяг</p>
           <div className="relative flex items-center justify-center">
@@ -80,6 +102,8 @@ const CV = ({ emp, setEmp }) => {
             </p>
           )}
         </div>
+
+        {/* Disability Checkbox */}
         <div
           onClick={() => {
             setEmp({ ...emp, isDisabled: !emp.isDisabled });

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IoIosArrowRoundForward, IoMdArrowForward } from "react-icons/io";
 import "../style/animations.css";
 
-const Ending = () => {
+const Ending = ({ setPage }) => {
   const [showEndings, setShowEndings] = useState(false);
 
   useEffect(() => {
@@ -13,19 +13,21 @@ const Ending = () => {
   }, []);
 
   return (
-    <div className="text-center mb-[180px]">
-      <div className="flex justify-center">
-        <div className="w-[145px] h-[145px] rounded-full bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 flex items-end">
-          <img src="/img/ending.png" alt="serius" />
+    <div className="text-center">
+      <div className="slide-up">
+        <div className="flex justify-center">
+          <div className="w-[145px] h-[145px] rounded-full bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 flex items-end">
+            <img src="/img/ending.png" alt="serius" />
+          </div>
         </div>
-      </div>
-      <div className="mt-6">
-        <p className="text-[#1A1A1A] text-[22px] font-semibold mb-3">
-          Идэвхитэй хариулсанд баяр хүргэе!
-        </p>
-        <p className="text-[#1A1A1A] text-sm">
-          Танд тун удахгүй мейлээр мэдээлэл очих болно оо.
-        </p>
+        <div className="mt-4">
+          <p className="text-[#1A1A1A] text-[22px] font-semibold mb-3">
+            Идэвхитэй хариулсанд баяр хүргэе!
+          </p>
+          <p className="text-[#1A1A1A] text-sm">
+            Танд тун удахгүй мейлээр мэдээлэл очих болно оо.
+          </p>
+        </div>
       </div>
       {showEndings && (
         <div className="mt-6 endings">
@@ -52,7 +54,12 @@ const Ending = () => {
             </div>
           </div>
           <div className="flex items-center justify-center mt-4">
-            <button className="w-[280px] bg-[#fff] rounded-xl text-[#1E293B] p-3 flex items-center justify-center gap-2 font-bold">
+            <button
+              onClick={() => {
+                setPage(20);
+              }}
+              className="w-[280px] bg-[#fff] rounded-xl text-[#1E293B] p-3 flex items-center justify-center gap-2 font-bold"
+            >
               Зурагтай болох
               <IoMdArrowForward />
             </button>

@@ -23,3 +23,18 @@
 .endings {
   animation: endingIn 1s ease-in forwards;
 }
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 1s ease-out forwards;
+}

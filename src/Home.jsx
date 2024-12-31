@@ -26,11 +26,14 @@ import Serius from "./components/Serius";
 import CV from "./components/CV";
 import Certificate from "./components/Certificate";
 import SalaryType from "./components/SalaryType";
+import Generate from "./components/Generate";
+import Generating from "./components/Generating";
 
 const Home = () => {
   const [all, setAll] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(7);
   const isEmailValid = /\S+@\S+\.\S+/;
+  const isCyrillic = /^[\u0400-\u04FF\s]+$/;
   const [emp, setEmp] = useState({
     situation: "",
     experience: { year: "", company: [] },
@@ -43,7 +46,7 @@ const Home = () => {
     equipment: [],
     welding: [],
     certificate: "",
-    certificateImg: "",
+    certificateImgs: [],
     workTime: "",
     workRange: "",
     salaryType: "",
@@ -65,6 +68,9 @@ const Home = () => {
   // State for background image
   const [backgroundImage, setBackgroundImage] = useState("/img/bg.svg");
   const isEmailValidCheck = isEmailValid.test(emp.mail);
+  const isLastnameValid = isCyrillic.test(emp.lastname);
+  const isFirstnameValid = isCyrillic.test(emp.firstname);
+  const isPhoneValid = emp.phone.length === 8;
 
   useViewportHeight();
 
@@ -120,7 +126,15 @@ const Home = () => {
       return emp.skills.length > 0;
     }
     if (page === 18) {
-      return emp.lastname && emp.firstname && emp.phone && isEmailValidCheck;
+      return (
+        emp.lastname &&
+        emp.firstname &&
+        emp.phone &&
+        isEmailValidCheck &&
+        isLastnameValid &&
+        isFirstnameValid &&
+        isPhoneValid
+      );
     }
     if (page > 18) {
       return false;
@@ -130,8 +144,9 @@ const Home = () => {
 
   return (
     <Background backgroundImage={backgroundImage}>
+      {console.log(emp)}
       <div className="flex flex-col items-center justify-center min-h-[calc(var(--vh,1vh)*100)] mx-[20px]">
-        {page !== 1 && page !== 2 && page !== 15 && page <= 17 && (
+        {page !== 1 && page !== 2 && page !== 15 && page < 19 && (
           <div
             className={`absolute ${
               page === 17 ? "top-[40px]" : "top-[40px]"
@@ -262,8 +277,14 @@ const Home = () => {
           <Advantages emp={emp} setEmp={setEmp} setPage={setPage} />
         ) : page === 18 ? (
           <CV emp={emp} setEmp={setEmp} />
+        ) : page === 19 ? (
+          <Ending setPage={setPage} />
+        ) : page === 20 ? (
+          <Generate setPage={setPage} />
+        ) : page === 21 ? (
+          <Generating />
         ) : (
-          <Ending />
+          ""
         )}
         {console.log(page)}
         {isButtonVisible() && page !== 17 && (
