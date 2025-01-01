@@ -43,7 +43,7 @@ const Certificate = ({ emp, setEmp }) => {
             }
           );
           console.log("formdata", formData);
-          const imageUrl = response.data.url;
+          const imageUrl = response.data;
           uploadedImages.push(imageUrl);
 
           setEmp((prevEmp) => ({
@@ -53,7 +53,7 @@ const Certificate = ({ emp, setEmp }) => {
 
           setImages((prevImages) => [...prevImages, imageUrl]);
         } catch (err) {
-          setError("Тамгалт явуулахад алдаа гарлаа.");
+          setError("Зураг явуулахад алдаа гарлаа.");
           console.error("Error uploading image:", err);
         }
       }
@@ -132,6 +132,7 @@ const Certificate = ({ emp, setEmp }) => {
           </p>
           {images.length > 0 && (
             <div className="flex flex-wrap gap-4 justify-center">
+              {console.log("images", images)}
               {images.map((img, index) => (
                 <div key={index} className="relative">
                   <img
@@ -204,7 +205,7 @@ const Certificate = ({ emp, setEmp }) => {
           {loading && (
             <div className="flex justify-center items-center mt-4">
               <div className="spinner-border animate-spin w-10 h-10 border-4 border-t-4 border-blue-500 rounded-full"></div>
-              <p className="text-[#575763] ml-2">Тамгалт илгээж байна...</p>
+              <p className="text-[#575763] ml-2">Зураг уншиж байна...</p>
             </div>
           )}
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}

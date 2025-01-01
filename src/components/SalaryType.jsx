@@ -5,15 +5,15 @@ const SalaryType = ({ emp, setEmp }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    setEmp({ ...emp, salary: "8’000₮ - 10’000₮" });
+    setEmp({ ...emp, salary: "100,000₮-150,000₮" });
     console.log("aaa");
   }, []);
 
   const options = [
-    { id: 0, label: "8’000₮ - 10’000₮", emoji: "🪙" },
-    { id: 1, label: "11’000₮ - 15’000₮", emoji: "💵" },
-    { id: 2, label: "16’000₮ - 20’000₮", emoji: "💸" },
-    { id: 3, label: "20’000₮ +", emoji: "💰" },
+    { id: 0, label: "100,000₮ - 150,000₮", emoji: "🪙" },
+    { id: 1, label: "150,000₮ - 200,000₮", emoji: "💵" },
+    { id: 2, label: "200,000₮ - 250,000₮", emoji: "💸" },
+    { id: 3, label: "+250,000₮ ", emoji: "💰" },
   ];
 
   const handleRangeChange = (e) => {
@@ -29,47 +29,45 @@ const SalaryType = ({ emp, setEmp }) => {
       </p>
       <div className="flex gap-4">
         <div
-          onClick={() => setEmp({ ...emp, salaryType: "time" })}
+          onClick={() => setEmp({ ...emp, salaryType: "day" })}
           className={`relative flex items-center justify-center border w-[48%] ${
-            emp.salaryType === "time" ? "h-[70px]" : "h-[138px]"
+            emp.salaryType === "day" ? "h-[70px]" : "h-[138px]"
           } rounded-xl px-3 cursor-pointer ${
-            emp.salaryType === "time"
+            emp.salaryType === "day"
               ? "border-[#324d72] bg-[#F4F6FB]"
               : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"
           } `}
         >
           <div
             className={`w-[20px] h-[20px] flex items-center justify-center rounded-full absolute ${
-              emp.salaryType === "time" ? "left-2" : "right-2"
+              emp.salaryType === "day" ? "left-2" : "right-2"
             } top-2 p-0.5 ${
-              emp.salaryType === "time"
+              emp.salaryType === "day"
                 ? "border-2 border-[#324D72]"
                 : "border-2 border-[#fff] border-opacity-80"
             }`}
           >
-            {emp.salaryType === "time" && (
+            {emp.salaryType === "day" && (
               <div className="w-full h-full bg-[#324d72] rounded-full"></div>
             )}
           </div>
           <div
-            className={`text-start ${emp.salaryType === "time" ? "ms-6" : ""}`}
+            className={`text-start ${emp.salaryType === "day" ? "ms-6" : ""}`}
           >
-            {emp.salaryType !== "time" && (
-              <p className="pb-0 text-[24px]">🕰️</p>
-            )}
+            {emp.salaryType !== "day" && <p className="pb-0 text-[24px]">🕰️</p>}
             <p
               className={`${
-                emp.salaryType === "time" ? "text-base" : "text-lg"
+                emp.salaryType === "day" ? "text-base" : "text-lg"
               } text-[#1E293B] font-semibold`}
             >
-              Цагийн үнэлгээгээр
+              Өдрийн үнэлгээ
             </p>
           </div>
         </div>
         <div
           onClick={() => setEmp({ ...emp, salaryType: "performance" })}
           className={`relative flex items-center justify-center border w-[48%] ${
-            emp.salaryType === "time" ? "h-[70px]" : "h-[138px]"
+            emp.salaryType === "day" ? "h-[70px]" : "h-[138px]"
           } rounded-xl px-3 cursor-pointer ${
             emp.salaryType === "performance"
               ? "border-[#324d72] bg-[#F4F6FB]"
@@ -78,7 +76,7 @@ const SalaryType = ({ emp, setEmp }) => {
         >
           <div
             className={`w-[20px] h-[20px] flex items-center justify-center rounded-full absolute ${
-              emp.salaryType === "time" ? "left-2" : "right-2"
+              emp.salaryType === "day" ? "left-2" : "right-2"
             } top-2 p-0.5 ${
               emp.salaryType === "performance"
                 ? "border-2 border-[#324D72]"
@@ -90,14 +88,12 @@ const SalaryType = ({ emp, setEmp }) => {
             )}
           </div>
           <div
-            className={`text-start ${emp.salaryType === "time" ? "ms-6" : ""}`}
+            className={`text-start ${emp.salaryType === "day" ? "ms-6" : ""}`}
           >
-            {emp.salaryType !== "time" && (
-              <p className="pb-0 text-[24px]">➗</p>
-            )}
+            {emp.salaryType !== "day" && <p className="pb-0 text-[24px]">➗</p>}
             <p
               className={`${
-                emp.salaryType === "time" ? "text-base" : "text-lg"
+                emp.salaryType === "day" ? "text-base" : "text-lg"
               } text-[#1E293B] font-semibold`}
             >
               Гүйцэтгэлээр
@@ -105,7 +101,7 @@ const SalaryType = ({ emp, setEmp }) => {
           </div>
         </div>
       </div>
-      {emp.salaryType === "time" && (
+      {emp.salaryType === "day" && (
         <div className="mt-6">
           <p className="font-semibold text-[#1A1A1A] text-[22px] mb-2">
             Цалингийн хүлээлтээ оруулна уу.
@@ -124,7 +120,7 @@ const SalaryType = ({ emp, setEmp }) => {
               }}
             />
           </div>
-          <div className="flex justify-between gap-8 w-full">
+          <div className="flex justify-between gap-4 w-full">
             {options.map((option, index) => (
               <div
                 key={option.id}
@@ -133,7 +129,7 @@ const SalaryType = ({ emp, setEmp }) => {
                 } transition-colors duration-300`}
               >
                 <span className="text-3xl">{option.emoji}</span>
-                <span className="mt-1 text-sm font-medium text-center">
+                <span className="mt-1 text-xs font-medium text-center ">
                   {option.label}
                 </span>
               </div>

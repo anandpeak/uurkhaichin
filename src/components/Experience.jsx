@@ -20,7 +20,10 @@ const Experience = ({ emp, setEmp }) => {
           <div
             key={option.value}
             onClick={() =>
-              setEmp({ ...emp, experience: { year: option.value } })
+              setEmp({
+                ...emp,
+                experience: { year: option.value, company: [] },
+              })
             }
             className={`w-full rounded-lg py-[12px] px-[16px] border ${
               emp.experience.year === option.value

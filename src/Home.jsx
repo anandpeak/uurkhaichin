@@ -61,10 +61,19 @@ const Home = () => {
     phone: "",
     lastName: "",
     firstName: "",
-    mail: "",
     photo: "",
+    mail: "",
     isDisabled: false,
   });
+
+  const [gen, setGen] = useState({
+    gender: "",
+    age: null,
+    photoUrl: "",
+    talentId: null,
+  });
+  const [aiImg, setAiImg] = useState(null);
+
   const [loading, setLoading] = useState(false);
 
   // State for background image
@@ -154,8 +163,10 @@ const Home = () => {
           },
         }
       );
+      setGen({ talentId: response.data.id });
       setLoading(false);
       setPage(19);
+      console.log(response.data.id);
       console.log("Response:", response.data);
     } catch (error) {
       console.log("Failed to send data.");
@@ -163,6 +174,25 @@ const Home = () => {
       setPage(19);
     }
   };
+
+  const generating = async () => {
+    console.log("loading", gen);
+    try {
+      const response = await axios.post(
+        "https://metacogserver.azurewebsites.net/v1/talent/photo",
+        gen,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setAiImg(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Background backgroundImage={backgroundImage}>
       <div className="flex flex-col items-center justify-center min-h-[calc(var(--vh,1vh)*100)] mx-[20px]">
@@ -284,7 +314,7 @@ const Home = () => {
         ) : page === 13 ? (
           <WorkDay emp={emp} setEmp={setEmp} />
         ) : page === 14 ? (
-          emp.situation === "temporary" ? (
+          emp.situation !== "temporary" ? (
             <SalaryType emp={emp} setEmp={setEmp} />
           ) : (
             <Salary emp={emp} setEmp={setEmp} />
@@ -300,9 +330,14 @@ const Home = () => {
         ) : page === 19 ? (
           <Ending setPage={setPage} />
         ) : page === 20 ? (
-          <Generate setPage={setPage} />
+          <Generate
+            generating={generating}
+            gen={gen}
+            setGen={setGen}
+            setPage={setPage}
+          />
         ) : page === 21 ? (
-          <Generating />
+          <Generating aiImg={aiImg} />
         ) : (
           ""
         )}
