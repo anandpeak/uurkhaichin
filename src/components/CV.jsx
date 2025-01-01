@@ -14,9 +14,9 @@ const CV = ({ emp, setEmp }) => {
   };
 
   const isEmailValidCheck = isEmailValid.test(emp.mail);
-  const isLastnameValid = isCyrillic.test(emp.lastname) || emp.lastname === "";
+  const isLastnameValid = isCyrillic.test(emp.lastName) || emp.lastName === "";
   const isFirstnameValid =
-    isCyrillic.test(emp.firstname) || emp.firstname === "";
+    isCyrillic.test(emp.firstName) || emp.firstName === "";
   const isPhoneValid = emp.phone.length === 8;
 
   return (
@@ -53,8 +53,8 @@ const CV = ({ emp, setEmp }) => {
               placeholder="Өөрийн овгийг бичнэ үү."
               className="py-2 px-4 bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 rounded-lg w-full"
               type="text"
-              value={emp.lastname}
-              onChange={(e) => handleInputChange(e, "lastname")}
+              value={emp.lastName}
+              onChange={(e) => handleInputChange(e, "lastName")}
             />
           </div>
           {!isLastnameValid && (
@@ -72,8 +72,8 @@ const CV = ({ emp, setEmp }) => {
               placeholder="Өөрийн нэрийг бичнэ үү."
               className="py-2 px-4 bg-[#fff] bg-opacity-30 border border-[#fff] border-opacity-80 rounded-lg w-full"
               type="text"
-              value={emp.firstname}
-              onChange={(e) => handleInputChange(e, "firstname")}
+              value={emp.firstName}
+              onChange={(e) => handleInputChange(e, "firstName")}
             />
           </div>
           {!isFirstnameValid && (

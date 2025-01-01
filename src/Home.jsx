@@ -28,6 +28,7 @@ import Certificate from "./components/Certificate";
 import SalaryType from "./components/SalaryType";
 import Generate from "./components/Generate";
 import Generating from "./components/Generating";
+import axios from "axios";
 
 const Home = () => {
   const [all, setAll] = useState(false);
@@ -58,18 +59,19 @@ const Home = () => {
     detailSkills: "",
     school: "",
     phone: "",
-    lastname: "",
-    firstname: "",
+    lastName: "",
+    firstName: "",
     mail: "",
     photo: "",
     isDisabled: false,
   });
+  const [loading, setLoading] = useState(false);
 
   // State for background image
   const [backgroundImage, setBackgroundImage] = useState("/img/bg.svg");
   const isEmailValidCheck = isEmailValid.test(emp.mail);
-  const isLastnameValid = isCyrillic.test(emp.lastname);
-  const isFirstnameValid = isCyrillic.test(emp.firstname);
+  const isLastnameValid = isCyrillic.test(emp.lastName);
+  const isFirstnameValid = isCyrillic.test(emp.firstName);
   const isPhoneValid = emp.phone.length === 8;
 
   useViewportHeight();
@@ -125,8 +127,8 @@ const Home = () => {
 
     if (page === 18) {
       return (
-        emp.lastname &&
-        emp.firstname &&
+        emp.lastName &&
+        emp.firstName &&
         emp.phone &&
         isEmailValidCheck &&
         isLastnameValid &&
@@ -140,9 +142,29 @@ const Home = () => {
     return true;
   };
 
+  const sendRequest = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "https://metacogserver.azurewebsites.net/v1/talent/create",
+        emp,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setLoading(false);
+      setPage(19);
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.log("Failed to send data.");
+      setLoading(false);
+      setPage(19);
+    }
+  };
   return (
     <Background backgroundImage={backgroundImage}>
-      {console.log(emp)}
       <div className="flex flex-col items-center justify-center min-h-[calc(var(--vh,1vh)*100)] mx-[20px]">
         {page !== 1 && page !== 2 && page !== 15 && page < 19 && (
           <div
@@ -284,7 +306,8 @@ const Home = () => {
         ) : (
           ""
         )}
-        {console.log(page)}
+        {console.log(emp)}
+
         {isButtonVisible() && page !== 16 && (
           <div className="fixed bottom-[14px] left-1/2 transform -translate-x-1/2 w-full flex justify-center">
             <button
@@ -331,6 +354,8 @@ const Home = () => {
                   } else {
                     setPage(12);
                   }
+                } else if (page === 18) {
+                  sendRequest();
                 } else {
                   setPage(page + 1);
                 }
@@ -338,8 +363,15 @@ const Home = () => {
               className={`w-[90%] page bg-[#fff] text-[#1E293B] font-bold rounded-lg py-2.5 button-in ${
                 page === 1 ? "mb-20" : ""
               }`}
+              disabled={loading}
             >
-              {page === 1 ? "Эхлүүлэх" : page === 15 ? "Бэлэн" : "Үргэлжлүүлэх"}
+              {loading
+                ? "Loading..."
+                : page === 1
+                ? "Эхлүүлэх"
+                : page === 15
+                ? "Бэлэн"
+                : "Үргэлжлүүлэх"}
             </button>
           </div>
         )}

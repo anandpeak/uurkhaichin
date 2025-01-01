@@ -34,7 +34,7 @@ const Equipment = ({ emp, setEmp }) => {
     { img: "/img/equipments/equip/pump.svg", name: "Насос / Pump" },
     {
       img: "/img/equipments/equip/floatation.svg",
-      name: "Баяжуулах / Floatation",
+      name: "Баяжуулах / Flotation",
     },
     {
       img: "/img/equipments/equip/thickener.svg",

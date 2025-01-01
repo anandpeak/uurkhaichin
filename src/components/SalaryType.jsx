@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 const SalaryType = ({ emp, setEmp }) => {
   const [rangeValue, setRangeValue] = useState(0);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setEmp({ ...emp, salary: "8’000₮ - 10’000₮" });
-  }, [emp, setEmp]);
+    console.log("aaa");
+  }, []);
 
   const options = [
     { id: 0, label: "8’000₮ - 10’000₮", emoji: "🪙" },
