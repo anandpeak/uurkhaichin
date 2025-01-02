@@ -94,7 +94,7 @@ const Generating = ({ aiImg }) => {
       )}
       {percent === 100 && aiImg && isIphone() && (
         <p className="text-[22px] text-[#1A1A1A] font-semibold mb-6">
-          Зурган дээл удаан дарж татаж авна уу
+          Зураг дээр удаан дарж татаж авна уу
         </p>
       )}
 

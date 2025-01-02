@@ -314,7 +314,7 @@ const Home = () => {
         ) : page === 13 ? (
           <WorkDay emp={emp} setEmp={setEmp} />
         ) : page === 14 ? (
-          emp.situation !== "temporary" ? (
+          emp.situation === "temporary" ? (
             <SalaryType emp={emp} setEmp={setEmp} />
           ) : (
             <Salary emp={emp} setEmp={setEmp} />
