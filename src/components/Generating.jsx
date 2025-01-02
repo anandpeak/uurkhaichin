@@ -23,6 +23,11 @@ const Generating = ({ aiImg }) => {
     return () => clearInterval(interval);
   }, [aiImg]);
 
+  const isIphone = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return /iphone|ipod/.test(userAgent);
+  };
+
   const shareOnFacebook = () => {
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
       aiImg
@@ -37,9 +42,15 @@ const Generating = ({ aiImg }) => {
       const response = await fetch(aiImg);
       const blob = await response.blob();
 
-      // For browsers like Safari on iOS
-      if (navigator.msSaveOrOpenBlob) {
-        navigator.msSaveOrOpenBlob(blob, "generated-image.png");
+      const isIphone = /iPhone/i.test(navigator.userAgent);
+
+      if (isIphone) {
+        const link = document.createElement("a");
+        link.href = aiImg;
+        link.download = "uurkhaichin.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
       } else {
         const img = new Image();
         img.src = URL.createObjectURL(blob);
@@ -57,7 +68,7 @@ const Generating = ({ aiImg }) => {
 
           const link = document.createElement("a");
           link.href = pngUrl;
-          link.setAttribute("download", "generated-image.png");
+          link.setAttribute("download", "uurkhaichin.png");
 
           document.body.appendChild(link);
           link.click();
@@ -80,6 +91,11 @@ const Generating = ({ aiImg }) => {
           </p>
           <p className="text-[#1A1A1A] text-lg mb-6">Та түр хүлээнэ үү.</p>
         </div>
+      )}
+      {percent === 100 && aiImg && isIphone() && (
+        <p className="text-[22px] text-[#1A1A1A] font-semibold mb-6">
+          Зурган дээл удаан дарж татаж авна уу
+        </p>
       )}
 
       <div className="flex justify-center pb-20">
