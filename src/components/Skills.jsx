@@ -71,6 +71,11 @@ const Skills = ({ emp, setEmp, setPage }) => {
         ],
       });
     }
+    if (type === "tech") {
+      setTechQuery("");
+    } else {
+      setQuery("");
+    }
   };
 
   return (
@@ -116,43 +121,54 @@ const Skills = ({ emp, setEmp, setPage }) => {
             </div>
             {techFocus && (
               <div className="w-[300px] max-h-[200px] mt-2 overflow-y-scroll rounded-lg bg-[#EDF0E5] border border-[#424242]">
-                {filterTech.map((item, index) => {
-                  const startIndex = item
-                    .toLowerCase()
-                    .indexOf(techQuery.toLowerCase());
-                  const endIndex = startIndex + techQuery.length;
+                {filterTech.length > 0 ? (
+                  filterTech.map((item, index) => {
+                    const startIndex = item
+                      .toLowerCase()
+                      .indexOf(techQuery.toLowerCase());
+                    const endIndex = startIndex + techQuery.length;
 
-                  return (
-                    <div
-                      className={`py-3 px-4  flex items-center justify-between gap-2 ${
-                        index === 0 ? "" : "border-t border-[#cfcfcf] "
-                      } relative`}
-                      key={index}
-                      onClick={() => handleClick(item, "tech")}
-                    >
-                      <div>
-                        {startIndex !== -1 ? (
-                          <>
+                    return (
+                      <div
+                        className={`py-3 px-4  flex items-center justify-between gap-2 ${
+                          index === 0 ? "" : "border-t border-[#cfcfcf] "
+                        } relative`}
+                        key={index}
+                        onClick={() => handleClick(item, "tech")}
+                      >
+                        <div>
+                          {startIndex !== -1 ? (
+                            <>
+                              <span className="text-[#1A1A1A] opacity-70">
+                                {item.slice(0, startIndex)}
+                              </span>
+                              <span className="text-[#1A1A1A] font-bold">
+                                {item.slice(startIndex, endIndex)}
+                              </span>
+                              <span className="text-[#1A1A1A] opacity-70">
+                                {item.slice(endIndex)}
+                              </span>
+                            </>
+                          ) : (
                             <span className="text-[#1A1A1A] opacity-70">
-                              {item.slice(0, startIndex)}
+                              {item}
                             </span>
-                            <span className="text-[#1A1A1A] font-bold">
-                              {item.slice(startIndex, endIndex)}
-                            </span>
-                            <span className="text-[#1A1A1A] opacity-70">
-                              {item.slice(endIndex)}
-                            </span>
-                          </>
-                        ) : (
-                          <span className="text-[#1A1A1A] opacity-70">
-                            {item}
-                          </span>
-                        )}
+                          )}
+                        </div>
+                        <div>
+                          {emp.techSkills.includes(item) && <FaCheck />}
+                        </div>
                       </div>
-                      <div>{emp.techSkills.includes(item) && <FaCheck />}</div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                ) : (
+                  <div
+                    className="py-3 px-4 flex items-center justify-center text-[#1A1A1A] opacity-70 cursor-pointer"
+                    onClick={() => handleClick(techQuery, "tech")}
+                  >
+                    <span>{techQuery}</span>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -183,43 +199,52 @@ const Skills = ({ emp, setEmp, setPage }) => {
           </div>
           {focus && (
             <div className="w-[300px] max-h-[200px] mt-2 overflow-y-scroll rounded-lg bg-[#EDF0E5] border border-[#424242]">
-              {filterSkills.map((item, index) => {
-                const startIndex = item
-                  .toLowerCase()
-                  .indexOf(query.toLowerCase());
-                const endIndex = startIndex + query.length;
+              {filterSkills.length > 0 ? (
+                filterSkills.map((item, index) => {
+                  const startIndex = item
+                    .toLowerCase()
+                    .indexOf(query.toLowerCase());
+                  const endIndex = startIndex + query.length;
 
-                return (
-                  <div
-                    className={`py-3 px-4 flex items-center justify-between gap-2 ${
-                      index === 0 ? "" : "border-t border-[#cfcfcf]"
-                    } relative`}
-                    key={index}
-                    onClick={() => handleClick(item, "soft")}
-                  >
-                    <div>
-                      {startIndex !== -1 ? (
-                        <>
+                  return (
+                    <div
+                      className={`py-3 px-4 flex items-center justify-between gap-2 ${
+                        index === 0 ? "" : "border-t border-[#cfcfcf]"
+                      } relative`}
+                      key={index}
+                      onClick={() => handleClick(item, "soft")}
+                    >
+                      <div>
+                        {startIndex !== -1 ? (
+                          <>
+                            <span className="text-[#1A1A1A] opacity-70">
+                              {item.slice(0, startIndex)}
+                            </span>
+                            <span className="text-[#1A1A1A] font-bold">
+                              {item.slice(startIndex, endIndex)}
+                            </span>
+                            <span className="text-[#1A1A1A] opacity-70">
+                              {item.slice(endIndex)}
+                            </span>
+                          </>
+                        ) : (
                           <span className="text-[#1A1A1A] opacity-70">
-                            {item.slice(0, startIndex)}
+                            {item}
                           </span>
-                          <span className="text-[#1A1A1A] font-bold">
-                            {item.slice(startIndex, endIndex)}
-                          </span>
-                          <span className="text-[#1A1A1A] opacity-70">
-                            {item.slice(endIndex)}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="text-[#1A1A1A] opacity-70">
-                          {item}
-                        </span>
-                      )}
+                        )}
+                      </div>
+                      <div>{emp.softSkills.includes(item) && <FaCheck />}</div>
                     </div>
-                    <div>{emp.softSkills.includes(item) && <FaCheck />}</div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <div
+                  className="py-3 px-4 flex items-center justify-center text-[#1A1A1A] opacity-70 cursor-pointer"
+                  onClick={() => handleClick(query, "soft")}
+                >
+                  <span>{query}</span>
+                </div>
+              )}
             </div>
           )}
         </div>
