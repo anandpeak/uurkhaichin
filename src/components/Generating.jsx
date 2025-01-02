@@ -37,30 +37,35 @@ const Generating = ({ aiImg }) => {
       const response = await fetch(aiImg);
       const blob = await response.blob();
 
-      const img = new Image();
-      img.src = URL.createObjectURL(blob);
+      // For browsers like Safari on iOS
+      if (navigator.msSaveOrOpenBlob) {
+        navigator.msSaveOrOpenBlob(blob, "generated-image.png");
+      } else {
+        const img = new Image();
+        img.src = URL.createObjectURL(blob);
 
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+          canvas.width = img.width;
+          canvas.height = img.height;
 
-        ctx.drawImage(img, 0, 0);
+          ctx.drawImage(img, 0, 0);
 
-        const pngUrl = canvas.toDataURL("image/png");
+          const pngUrl = canvas.toDataURL("image/png");
 
-        const link = document.createElement("a");
-        link.href = pngUrl;
-        link.setAttribute("download", "generated-image.png");
+          const link = document.createElement("a");
+          link.href = pngUrl;
+          link.setAttribute("download", "generated-image.png");
 
-        document.body.appendChild(link);
-        link.click();
+          document.body.appendChild(link);
+          link.click();
 
-        URL.revokeObjectURL(img.src);
-        document.body.removeChild(link);
-      };
+          URL.revokeObjectURL(img.src);
+          document.body.removeChild(link);
+        };
+      }
     } catch (error) {
       console.error("Failed to download the image:", error);
     }

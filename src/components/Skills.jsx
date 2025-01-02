@@ -163,7 +163,7 @@ const Skills = ({ emp, setEmp, setPage }) => {
             techFocus ? "hidden" : "z-30 relative"
           }`}
         >
-          <p className="text-sm mb-2">Хувь хүний ур чадвар</p>
+          <p className="text-sm mb-2">Хувь хүний ур чадвар ба гадаад хэл</p>
           <div className="relative flex items-center">
             <div className="absolute left-3 text-[#1E293B]">
               <FaMagnifyingGlass />

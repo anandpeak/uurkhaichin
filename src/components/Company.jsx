@@ -81,9 +81,25 @@ const Company = ({ emp, setEmp }) => {
               })}
             </ul>
           ) : (
-            <p className="text-[#1A1A1A] text-opacity-60 py-4">
-              Хайлтанд тохирох байгууллага олдсонгүй.
-            </p>
+            <div>
+              <div
+                className="text-[#1E293B] text-start cursor-pointer hover:underline py-2"
+                onClick={() => {
+                  if (!selectedCompanies.includes(query)) {
+                    setEmp((prev) => ({
+                      ...prev,
+                      experience: {
+                        ...prev.experience,
+                        company: [...selectedCompanies, query],
+                      },
+                    }));
+                  }
+                  setQuery("");
+                }}
+              >
+                {query}
+              </div>
+            </div>
           )}
         </div>
       ) : (
