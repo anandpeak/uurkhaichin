@@ -93,6 +93,18 @@ const Home = () => {
     }
   }, [page]);
 
+  useEffect(() => {
+    const isFacebookInAppBrowser = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      return userAgent.includes("FBAN") || userAgent.includes("FBAV");
+    };
+
+    if (isFacebookInAppBrowser()) {
+      const url = "https://www.uurkhaichin.mn/";
+      window.location.href = url;
+    }
+  }, []);
+
   const isButtonVisible = () => {
     if (page === 2) {
       return emp.situation;
