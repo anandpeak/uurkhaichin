@@ -60,38 +60,60 @@ const Condition = ({ emp, setEmp }) => {
           </div>
         </div>
       </div>
-      <div
-        onClick={() => {
-          setEmp({ ...emp, situation: "retired" });
-        }}
-        className={`w-full flex items-center  gap-2 border rounded-xl p-3 mt-4 ${
-          emp.situation === "retired"
-            ? "border-[#324d72] bg-[#F4F6FB]"
-            : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"
-        }`}
-      >
+      <div className="flex items-center justify-center gap-6 mt-6">
         <div
-          className={`w-[20px] h-[20px] flex items-center justify-center rounded-full p-0.5 ${
-            emp.situation === "retired"
-              ? "border-2 border-[#324D72]"
-              : "border-2 border-[#fff] border-opacity-80"
-          }`}
+          onClick={() => setEmp({ ...emp, situation: "reitred" })}
+          className={`relative flex items-center justify-center border w-[48%] h-[180px] rounded-xl px-3 cursor-pointer ${
+            emp.situation === "reitred"
+              ? "border-[#324d72] bg-[#F4F6FB]"
+              : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"
+          } `}
         >
-          {emp.situation === "retired" && (
-            <div className="w-full h-full bg-[#324d72] rounded-full"></div>
-          )}
+          <div
+            className={`w-[20px] h-[20px] flex items-center justify-center rounded-full absolute right-2 top-2 p-0.5 ${
+              emp.situation === "reitred"
+                ? "border-2 border-[#324D72]"
+                : "border-2 border-[#fff] border-opacity-80"
+            }`}
+          >
+            {emp.situation === "reitred" && (
+              <div className="w-full h-full bg-[#324d72] rounded-full"></div>
+            )}
+          </div>
+          <div className="text-start">
+            <p className="pb-0 text-[24px]">💎</p>
+            <p className="text-lg text-[#1E293B] font-semibold">
+              Туршлагатай мэргэжилтэн
+            </p>
+            <p className="text-[#1E293B] text-opacity-60 text-xs">
+              Тэтгэвэрт гарсан ч ажил хайж байгаа
+            </p>
+          </div>
         </div>
-        <div>
-          <div className="flex items-start">
-            <p className="text-2xl">💎</p>
-            <div className="text-start">
-              <p className="font-semibold text-lg text-[#1E293B]">
-                Туршлагатай мэргэжилтэн
-              </p>
-              <p className="text-sm text-[#1E293B] opacity-60">
-                Тэтгэвэрт гарсан ч ажил хайж байгаа
-              </p>
-            </div>
+        <div
+          onClick={() => setEmp({ ...emp, situation: "inActive" })}
+          className={`relative flex items-center justify-center border w-[48%] h-[180px] rounded-xl px-3 cursor-pointer ${
+            emp.situation === "inActive"
+              ? "border-[#324d72] bg-[#F4F6FB]"
+              : "border-[#fff] border-opacity-80 bg-[#fff] bg-opacity-30"
+          } `}
+        >
+          <div
+            className={`w-[20px] h-[20px] flex items-center justify-center rounded-full absolute right-2 top-2 p-0.5 ${
+              emp.situation === "inActive"
+                ? "border-2 border-[#324D72]"
+                : "border-2 border-[#fff] border-opacity-80"
+            }`}
+          >
+            {emp.situation === "inActive" && (
+              <div className="w-full h-full bg-[#324d72] rounded-full"></div>
+            )}
+          </div>
+          <div className="text-start">
+            <p className="pb-0 text-[24px]">🙋‍♂️</p>
+            <p className="text-lg text-[#1E293B] font-semibold">
+              Ажил хайгаагүй ч бүртгүүлье!
+            </p>
           </div>
         </div>
       </div>
