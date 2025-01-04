@@ -4,7 +4,7 @@ import { MdMailOutline } from "react-icons/md";
 
 const CV = ({ emp, setEmp }) => {
   const isEmailValid = /\S+@\S+\.\S+/;
-  const isCyrillic = /^[\u0400-\u04FF\s]+$/;
+  const isCyrillic = /^[\u0400-\u04FF\s-]+$/;
 
   const handleInputChange = (e, field) => {
     setEmp({
