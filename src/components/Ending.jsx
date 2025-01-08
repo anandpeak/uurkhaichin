@@ -7,7 +7,7 @@ const Ending = ({ setPage }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowEndings(true);
+      setShowEndings(false);
     }, 1000); // 2 seconds delay
     return () => clearTimeout(timer); // Cleanup the timer on component unmount
   }, []);
