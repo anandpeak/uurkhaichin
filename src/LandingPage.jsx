@@ -96,7 +96,7 @@ const LandingPage = () => {
                       onClick={() => {
                         navigate("/home");
                       }}
-                      className="text-[#fff] flex items-center gap-2 text-xs md:text-sm bg-[#F88F00] ps-3 pe-2 py-1 md:mt-0 mt-3 md:py-2.5 rounded-3xl font-bold"
+                      className="text-[#fff] flex items-center gap-2 text-xs md:text-sm bg-[#F88F00] ps-3 pe-2 py-1 md:mt-0 mt-3 md:py-2.5 rounded-3xl font-bold z-10"
                     >
                       Бүртгүүлэх <FaArrowRight />
                     </button>
