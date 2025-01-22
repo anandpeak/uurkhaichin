@@ -81,7 +81,7 @@ const LandingPage = () => {
               </p>
               <div className="flex justify-center">
                 <div className="flex flex-wrap w-[300px] md:w-[570px] items-center justify-between gap-3 md:gap-6 mb-6 md:mb-10">
-                  <div className="p-6 bg-[#1A1A1A] w-[295px] md:w-[270px] h-[93px] md:h-[200px] relative flex flex-col justify-between items-start md:items-end rounded-xl">
+                  <div className="p-6 bg-[#1A1A1A] w-[295px] md:w-[270px] h-[93px] md:h-[170px] relative flex flex-col justify-between items-start md:items-end rounded-xl">
                     <p className="text-sm md:text-[20px] text-[#fff] font-semibold">
                       Ажил хайж байна
                     </p>
@@ -101,7 +101,7 @@ const LandingPage = () => {
                       Бүртгүүлэх <FaArrowRight />
                     </button>
                   </div>
-                  <div className="p-6 bg-[#1A1A1A] w-[295px] md:w-[270px] h-[93px] md:h-[200px] relative flex flex-col justify-between items-end rounded-xl">
+                  <div className="p-6 bg-[#1A1A1A] w-[295px] md:w-[270px] h-[93px] md:h-[170px] relative flex flex-col justify-between items-end rounded-xl">
                     <p className="md:text-[20px] text-sm text-[#fff] font-semibold">
                       Байгууллага
                     </p>
@@ -122,11 +122,18 @@ const LandingPage = () => {
                       </button>
                     </a>
                   </div>
-                  <div className="md:p-6 px-3 pt-6 pb-3 text-end bg-[#1A1A1A] w-[140px] md:w-[270px] h-[120px] md:h-[200px] relative flex flex-col justify-between items-end rounded-xl">
+                  <div className="md:p-6 px-3 pt-6 pb-3 text-end bg-[#1A1A1A] w-[140px] md:w-[270px] h-[120px] md:h-[170px] relative flex flex-col justify-between items-end rounded-xl">
                     <p className="md:text-[20px] text-sm text-[#fff] font-semibold">
                       Сургалтын <br /> байгууллага
                     </p>
-                    <div className="absolute md:bottom-0 md:left-0 top-2 left-2">
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: window.innerWidth >= 768 ? "0" : "",
+                        left: window.innerWidth >= 768 ? "0" : "8px",
+                        top: window.innerWidth < 768 ? "8px" : "",
+                      }}
+                    >
                       <img
                         className="md:w-auto w-[52px]"
                         src="/img/landing/training.svg"
@@ -140,12 +147,19 @@ const LandingPage = () => {
                       Тун удахгүй...
                     </button>
                   </div>
-                  <div className="md:p-6 px-3 pt-6 pb-3 text-end bg-[#1A1A1A] w-[140px] md:w-[270px] h-[120px] md:h-[200px] relative flex flex-col justify-between items-end rounded-xl">
+                  <div className="md:p-6 px-3 pt-6 pb-3 text-end bg-[#1A1A1A] w-[140px] md:w-[270px] h-[120px] md:h-[170px] relative flex flex-col justify-between items-end rounded-xl">
                     <p className="md:text-[20px] text-sm text-[#fff] font-semibold">
                       Ирээдүйн
                       <br /> уурхайчин
                     </p>
-                    <div className="absolute md:bottom-0 md:left-0 top-2 left-2">
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: window.innerWidth >= 768 ? "0" : "",
+                        left: window.innerWidth >= 768 ? "0" : "4px",
+                        top: window.innerWidth < 768 ? "12px" : "",
+                      }}
+                    >
                       <img
                         className="md:w-auto w-[42px]"
                         src="/img/landing/future.svg"
@@ -171,11 +185,11 @@ const LandingPage = () => {
                 </div>
                 <div className="flex items-center text-white gap-2 mb-2">
                   <MdOutlineLocalPhone />
-                  <p className="text-sm">+976 9999-9999</p>
+                  <p className="text-sm">+976 9902-7396</p>
                 </div>
                 <div className="flex items-center text-white gap-2 mb-2">
                   <MdOutlineEmail />
-                  <p className="text-sm">uurkhaichin@gmail.com</p>
+                  <p className="text-sm">bilguundayan@uurkhaichin.mn</p>
                 </div>
                 <div className="hidden md:flex justify-end">
                   <p className="text-[#FFFFFF] font-semibold opacity-60">
