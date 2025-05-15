@@ -185,7 +185,7 @@ const LandingPage = () => {
                 </div>
                 <div className="flex items-center text-white gap-2 mb-2">
                   <MdOutlineLocalPhone />
-                  <p className="text-sm">+976 9902-7396</p>
+                  <p className="text-sm">+976 8800-1567, +976 9339-1120</p>
                 </div>
                 <div className="flex items-center text-white gap-2 mb-2">
                   <MdOutlineEmail />
