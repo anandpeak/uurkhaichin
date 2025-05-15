@@ -193,7 +193,7 @@ const LandingPage = () => {
                 </div>
                 <div className="hidden md:flex justify-end">
                   <p className="text-[#FFFFFF] font-semibold opacity-60">
-                    Uurkhaichin аппликейшн тун удахгүй...
+                    Uurkhaichin аппликейшн тун удахгүй....
                   </p>
                 </div>
               </div>
